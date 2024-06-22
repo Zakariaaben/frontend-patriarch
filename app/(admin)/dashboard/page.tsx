@@ -1,4 +1,4 @@
-import DisplayProjects from "@/components/DisplayProjects";
+import DisplayProjects from "@/utils/DisplayProjects";
 import { getUser } from "./getUser";
 import { ChangeAdmin } from "@/components/changeAdmin";
 

@@ -12,19 +12,21 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import axios from "axios";
+import { handleChangeAdmin } from "@/utils/Auth/handleChangeAdmin";
 import { X } from "lucide-react";
-import { useRef, useState } from "react";
+import { useState } from "react";
+import { MoonLoader } from "react-spinners";
 
-export function ChangeAdmin() {
+export function ChangeAdmin({ className }: { className?: string }) {
   const [formData, setFormData] = useState<AdminFormType>({
     username: "",
     password: "",
   });
   const [confirmedPassword, setConfirmedPassword] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const confirmPasswordInput = useRef<HTMLInputElement>(null);
+  const [message, setMessage] = useState<string>("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target;
@@ -34,30 +36,20 @@ export function ChangeAdmin() {
     }));
   };
 
-  const handleChangeAdmin = async (e: React.FormEvent<HTMLFormElement>) => {
-    if (formData.password !== confirmedPassword) {
-      confirmPasswordInput.current?.setCustomValidity("Passwords do not match");
-      return;
-    }
-    e.preventDefault();
-    const response = await axios.post(
-      "http://" + process.env.NEXT_PUBLIC_API_URL + "/api/auth/changeadmin",
-      formData
-    );
-
-    //change admin credentials
-    console.log(formData);
-  };
-
   return (
     <Dialog open={isOpen}>
       <DialogTrigger asChild>
-        <Button variant="outline" onClick={() => setIsOpen(true)}>
+        <Button
+          variant="outline"
+          onClick={() => {
+            setIsOpen(true), setMessage("");
+          }}
+          className={className}
+        >
           Change User
         </Button>
       </DialogTrigger>
-
-      <DialogContent className="sm:max-w-[325px]">
+      <DialogContent className="sm:max-w-[525px]">
         <DialogClose
           onClick={() => setIsOpen(false)}
           className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none   disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground"
@@ -72,7 +64,18 @@ export function ChangeAdmin() {
             boutton pour sauvegarder
           </DialogDescription>
         </DialogHeader>
-        <form onSubmit={handleChangeAdmin}>
+        <form
+          onSubmit={(e) =>
+            handleChangeAdmin(
+              e,
+              setLoading,
+              setIsOpen,
+              setMessage,
+              formData,
+              confirmedPassword
+            )
+          }
+        >
           <div className="grid gap-4 py-4">
             <div className="grid grid-cols-4 items-center gap-4">
               <Label htmlFor="name" className="text-right">
@@ -106,14 +109,24 @@ export function ChangeAdmin() {
                 placeholder="Confirm Password"
                 className="col-span-3"
                 type="password"
-                ref={confirmPasswordInput}
                 required={true}
                 onChange={(e) => setConfirmedPassword(e.target.value)}
               />
             </div>
           </div>
-          <DialogFooter>
-            <Button type="submit">Change Credentials</Button>
+          <DialogFooter className="flex items-center gap-5">
+            <div>{message}</div>
+            <Button
+              type="submit"
+              className={`flex gap-2 items-center justify-center transition-all duration-200 ease-in-out ${
+                loading ? "px-4" : "px-2"
+              }`}
+            >
+              <div>Change Credentials</div>
+              {loading && (
+                <MoonLoader color={"#ffffff"} speedMultiplier={0.5} size={20} />
+              )}
+            </Button>
           </DialogFooter>
         </form>
       </DialogContent>
