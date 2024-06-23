@@ -1,4 +1,5 @@
 import axios from "axios";
+
 import { Dispatch, SetStateAction } from "react";
 
 export const handleChangeAdmin = async (
@@ -7,7 +8,8 @@ export const handleChangeAdmin = async (
   setIsOpen: (value: SetStateAction<boolean>) => void,
   setMessage: Dispatch<SetStateAction<string>>,
   formData: AdminFormType,
-  confirmedPassword: string
+  confirmedPassword: string,
+  router: any
 ) => {
   e.preventDefault();
   setMessage("");
@@ -34,7 +36,8 @@ export const handleChangeAdmin = async (
           withCredentials: true,
         }
       );
-      return setIsOpen(false);
+      setIsOpen(false);
+      return router.refresh();
     }
   } catch (error) {
     console.error(error);

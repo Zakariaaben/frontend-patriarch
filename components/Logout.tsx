@@ -31,8 +31,8 @@ export default function Logout({ className }: { className?: string }) {
             Êtes vous sûr de vouloir vous déconnecter?
           </AlertDialogTitle>
           <AlertDialogDescription>
-            Vous allez être redirigé vers la page d'accueil, vous devrez vous
-            reconnecter pour accéder à votre compte.
+            Vous allez être redirigé vers la page d&apos;accueil, vous devrez
+            vous reconnecter pour accéder à votre compte.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <div className="w-full  flex justify-center sm:justify-end">

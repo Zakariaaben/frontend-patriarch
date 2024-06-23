@@ -14,6 +14,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { handleChangeAdmin } from "@/utils/Auth/handleChangeAdmin";
 import { X } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { MoonLoader } from "react-spinners";
 
@@ -22,6 +23,7 @@ export function ChangeAdmin({ className }: { className?: string }) {
     username: "",
     password: "",
   });
+  const router = useRouter();
   const [confirmedPassword, setConfirmedPassword] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -72,7 +74,8 @@ export function ChangeAdmin({ className }: { className?: string }) {
               setIsOpen,
               setMessage,
               formData,
-              confirmedPassword
+              confirmedPassword,
+              router
             )
           }
         >
