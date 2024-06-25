@@ -17,7 +17,7 @@ async function DisplayProjects() {
   const Projects: Project[] = await fetchProjects();
 
   return (
-    <div className="grid gap-10 absolute ">
+    <div className="grid gap-10  ">
       {Projects.map((Project, key) => (
         <div key={key} className="grid gap-3 ">
           <div>Name: {Project.name}</div>
