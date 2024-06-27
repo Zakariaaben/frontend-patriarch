@@ -94,51 +94,39 @@ const Row = ({ favorite = false }: { favorite?: boolean }) => {
 
 function ProjectsTable({ projects }: { projects?: any[] }) {
   return (
-    <Card className="">
-      <CardHeader>
-        <CardTitle className="text-lg">Projets</CardTitle>
-        <CardDescription>
-          Manage your products and view their sales performance.
-        </CardDescription>
-      </CardHeader>
-      <ScrollArea className="h-[calc(100vh-8rem)] w-full border-t-2 border-slate-400">
-        <CardContent>
-          <Table className="">
-            <TableHeader>
-              <TableRow>
-                <TableHead className="hidden w-[100px] md:table-cell">
-                  <span className="sr-only">Image</span>
-                </TableHead>
-                <TableHead>Nom</TableHead>
-                <TableHead>Description</TableHead>
-                <TableHead className="hidden md:table-cell">Date</TableHead>
-                <TableHead className="hidden md:table-cell">
-                  Created at
-                </TableHead>
-                <TableHead className="hidden w-[100px] md:table-cell">
-                  <span className="sr-only">Favoris</span>
-                </TableHead>
-                <TableHead>
-                  <span className="sr-only">Actions</span>
-                </TableHead>
-              </TableRow>
-            </TableHeader>
+    <CardContent>
+      <Table className="">
+        <TableHeader>
+          <TableRow>
+            <TableHead className="hidden w-[100px] md:table-cell">
+              <span className="sr-only">Image</span>
+            </TableHead>
+            <TableHead>Nom</TableHead>
+            <TableHead>Description</TableHead>
+            <TableHead className="hidden md:table-cell">Date</TableHead>
+            <TableHead className="hidden md:table-cell">Created at</TableHead>
+            <TableHead className="hidden w-[100px] md:table-cell">
+              <span className="sr-only">Favoris</span>
+            </TableHead>
+            <TableHead>
+              <span className="sr-only">Actions</span>
+            </TableHead>
+          </TableRow>
+        </TableHeader>
 
-            <TableBody className="rounded-lg">
-              <Row favorite={true} />
-              <Row />
-              <Row />
-              <Row />
-              <Row />
-              <Row />
-              <Row />
-              <Row />
-              <Row />
-            </TableBody>
-          </Table>
-        </CardContent>
-      </ScrollArea>
-    </Card>
+        <TableBody className="rounded-lg">
+          <Row favorite={true} />
+          <Row />
+          <Row />
+          <Row />
+          <Row />
+          <Row />
+          <Row />
+          <Row />
+          <Row />
+        </TableBody>
+      </Table>
+    </CardContent>
   );
 }
 
