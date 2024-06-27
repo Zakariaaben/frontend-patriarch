@@ -1,6 +1,8 @@
+"use client";
 import {
   Home,
   LineChart,
+  ListTodo,
   Package,
   Package2,
   ShoppingCart,
@@ -15,16 +17,20 @@ import {
 } from "../ui/tooltip";
 
 const Links = [
-  { link: "Dashboard", icon: <Home className="h-5 w-5" /> },
-  { link: "Orders", icon: <ShoppingCart className="h-5 w-5" /> },
-  { link: "Products", icon: <Package className="h-5 w-5" /> },
-  { link: "Customers", icon: <Users2 className="h-5 w-5" /> },
-  { link: "Analytics", icon: <LineChart className="h-5 w-5" /> },
+  { link: "Projets", icon: <ListTodo /> },
+  { link: "Services", icon: <ShoppingCart /> },
+  { link: "Products", icon: <Package /> },
+  { link: "Customers", icon: <Users2 /> },
+  { link: "Analytics", icon: <LineChart /> },
 ];
+import { usePathname } from "next/navigation";
+import React from "react";
 
 const SideNav = () => {
+  const path = usePathname();
+  console.log(path);
   return (
-    <nav className="flex flex-col items-center gap-4 px-2 py-4 border-r-2 h-screen max-sm:hidden overflow-hidden">
+    <nav className="flex flex-col items-center gap-4 px-2 py-4 w-16 border-r-2 h-screen max-sm:hidden overflow-hidden">
       <Link
         href="#"
         className="group flex h-9 w-9 shrink-0 items-center justify-center gap-2 rounded-full bg-primary text-lg font-semibold text-primary-foreground md:h-8 md:w-8 md:text-base"
@@ -33,15 +39,30 @@ const SideNav = () => {
         <span className="sr-only">Acme Inc</span>
       </Link>
       <TooltipProvider>
-        {Links.map((link) => {
+        {Links.map((link, key) => {
           return (
-            <Tooltip>
+            <Tooltip key={key}>
               <TooltipTrigger asChild>
                 <Link
-                  href="#"
-                  className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
+                  href={`/dashboard/${link.link.toLowerCase()}`}
+                  className="flex h-10 w-10 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
                 >
-                  {link.icon}
+                  <div
+                    className={
+                      "h-8 w-8 flex items-center justify-center rounded-xl bg-transparent transition-color " +
+                      (path.includes(link.link.toLowerCase())
+                        ? "bg-slate-100"
+                        : "")
+                    }
+                  >
+                    {React.cloneElement(link.icon, {
+                      className:
+                        "h-6 w-6 " +
+                        (path.includes(link.link.toLowerCase())
+                          ? "text-black"
+                          : ""),
+                    })}
+                  </div>
                   <span className="sr-only">{link.link}</span>
                 </Link>
               </TooltipTrigger>
