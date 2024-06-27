@@ -51,7 +51,7 @@ const SideNav = () => {
                     className={
                       "h-8 w-8 flex items-center justify-center rounded-xl bg-transparent transition-color " +
                       (path.includes(link.link.toLowerCase())
-                        ? "bg-slate-100"
+                        ? "bg-gray-100"
                         : "")
                     }
                   >
