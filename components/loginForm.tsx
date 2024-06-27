@@ -55,6 +55,7 @@ export function LoginForm() {
               value={formData.username}
               onChange={handleChange}
               placeholder="Enter Username"
+              className="text-md"
               required
             />
           </div>
@@ -65,6 +66,7 @@ export function LoginForm() {
               type="password"
               onChange={handleChange}
               value={formData.password}
+              className="text-md"
               placeholder="Enter Password"
               required
             />

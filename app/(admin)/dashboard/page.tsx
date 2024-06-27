@@ -1,22 +1,14 @@
-import DisplayProjects from "@/utils/DisplayProjects";
-import { getUser } from "./getUser";
-import { ChangeAdmin } from "@/components/changeAdmin";
-import Logout from "@/components/Logout";
 import ProjectsTable from "@/components/Admin Components/ProjectsTable";
+import TopBar from "@/components/Admin Components/TopBar";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
-const Dashboard = async () => {
-  const user = await getUser();
-
+const Dashboard = () => {
   return (
     <>
-      <div className="bg-muted/40">
-        <h2 className="text-3xl font-bold">Bienvenue {user?.username} !</h2>
-        <ChangeAdmin />
-        <Logout />
+      <div className="flex flex-col gap-4 m-4">
+        <TopBar />
 
-        <div className=" ">
-          <ProjectsTable />
-        </div>
+        <ProjectsTable />
       </div>
     </>
   );

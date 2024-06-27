@@ -14,6 +14,7 @@ import {
   AlertDialogTrigger,
 } from "./ui/alertDialog";
 import { MoonLoader } from "react-spinners";
+import { LogOut } from "lucide-react";
 
 export default function Logout({ className }: { className?: string }) {
   const [loading, setLoading] = React.useState(false);
@@ -21,8 +22,12 @@ export default function Logout({ className }: { className?: string }) {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button variant="outline" className={className}>
+        <Button
+          variant="outline"
+          className={className + "flex justify-between "}
+        >
           Logout
+          <LogOut className="w-5 transform rotate-180" />
         </Button>
       </AlertDialogTrigger>
       <AlertDialogContent>

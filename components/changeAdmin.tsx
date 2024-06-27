@@ -17,8 +17,17 @@ import { X } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { MoonLoader } from "react-spinners";
+import { useToast } from "./ui/use-toast";
 
-export function ChangeAdmin({ className }: { className?: string }) {
+export function ChangeAdmin({
+  className,
+  open,
+  triggerChangeAdmin,
+}: {
+  className?: string;
+  open?: boolean;
+  triggerChangeAdmin?: (value: boolean) => void;
+}) {
   const [formData, setFormData] = useState<AdminFormType>({
     username: "",
     password: "",
@@ -30,6 +39,8 @@ export function ChangeAdmin({ className }: { className?: string }) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [message, setMessage] = useState<string>("");
 
+  const { toast } = useToast();
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target;
     setFormData((prevState) => ({
@@ -39,12 +50,17 @@ export function ChangeAdmin({ className }: { className?: string }) {
   };
 
   return (
-    <Dialog open={isOpen}>
+    <Dialog open={isOpen || open}>
       <DialogTrigger asChild>
         <Button
-          variant="outline"
+          variant="ghost"
           onClick={() => {
-            setIsOpen(true), setMessage("");
+            if (triggerChangeAdmin) {
+              triggerChangeAdmin(true);
+            }
+
+            setMessage("");
+            setIsOpen(true);
           }}
           className={className}
         >
@@ -53,7 +69,12 @@ export function ChangeAdmin({ className }: { className?: string }) {
       </DialogTrigger>
       <DialogContent className="sm:max-w-[525px]">
         <DialogClose
-          onClick={() => setIsOpen(false)}
+          onClick={() => {
+            setIsOpen(false);
+            if (triggerChangeAdmin) {
+              triggerChangeAdmin(false);
+            }
+          }}
           className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none   disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground"
         >
           <X className="h-4 w-4" />
@@ -75,7 +96,9 @@ export function ChangeAdmin({ className }: { className?: string }) {
               setMessage,
               formData,
               confirmedPassword,
-              router
+              router,
+              triggerChangeAdmin,
+              toast
             )
           }
         >

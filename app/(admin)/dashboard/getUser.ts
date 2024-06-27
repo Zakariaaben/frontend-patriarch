@@ -11,7 +11,7 @@ export const getUser = async () => {
 
     return jwtDecode(jwt) as {
       username: string;
-      id: string;
+      id: number;
     };
   } catch (e) {
     console.error(e);

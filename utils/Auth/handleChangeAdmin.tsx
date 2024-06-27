@@ -1,5 +1,4 @@
 import axios from "axios";
-
 import { Dispatch, SetStateAction } from "react";
 
 export const handleChangeAdmin = async (
@@ -9,7 +8,9 @@ export const handleChangeAdmin = async (
   setMessage: Dispatch<SetStateAction<string>>,
   formData: AdminFormType,
   confirmedPassword: string,
-  router: any
+  router: any,
+  triggerChangeAdmin: ((value: boolean) => void) | undefined,
+  toast: any
 ) => {
   e.preventDefault();
   setMessage("");
@@ -37,11 +38,17 @@ export const handleChangeAdmin = async (
         }
       );
       setIsOpen(false);
+      if (triggerChangeAdmin) triggerChangeAdmin(false);
       return router.refresh();
     }
   } catch (error) {
     console.error(error);
   } finally {
     setLoading(false);
+    toast({
+      title: "Informations Modifiées avec succès",
+      description: "Nouveau nom d'utilisateur : " + formData.username,
+    });
+    console.log("Informations Modifiées avec succès");
   }
 };
