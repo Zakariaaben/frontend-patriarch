@@ -1,17 +1,11 @@
-import axios from "axios";
+import { client } from "../api/client";
 
 export const handleLogout = async (
   setLoading: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
   setLoading(true);
   try {
-    await axios.get(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/auth/logout`,
-
-      {
-        withCredentials: true,
-      }
-    );
+    await client.get("/api/auth/logout");
     window.location.href = "/";
   } catch (error) {
     console.error(error);

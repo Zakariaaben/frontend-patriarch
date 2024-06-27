@@ -1,5 +1,5 @@
-import axios from "axios";
 import { Dispatch, SetStateAction } from "react";
+import { client } from "../api/client";
 
 export const handleChangeAdmin = async (
   e: React.FormEvent<HTMLFormElement>,
@@ -22,21 +22,9 @@ export const handleChangeAdmin = async (
   }
 
   try {
-    const response = await axios.post(
-      process.env.NEXT_PUBLIC_API_URL + "/api/auth/changeadmin",
-      formData,
-      {
-        withCredentials: true,
-      }
-    );
+    const response = await client.post("/api/auth/changeadmin", formData);
     if (response.status === 200) {
-      await axios.post(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/auth/login`,
-        formData,
-        {
-          withCredentials: true,
-        }
-      );
+      await client.post("/api/auth/login", formData);
       setIsOpen(false);
       if (triggerChangeAdmin) triggerChangeAdmin(false);
       return router.refresh();

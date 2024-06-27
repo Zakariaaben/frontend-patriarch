@@ -1,5 +1,5 @@
-import axios from "axios";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
+import { client } from "../api/client";
 
 export const handleSignIn = async (
   event: React.FormEvent<HTMLFormElement>,
@@ -11,13 +11,7 @@ export const handleSignIn = async (
   event.preventDefault();
   try {
     setLoading(true);
-    const response = await axios.post(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/auth/login`,
-      formData,
-      {
-        withCredentials: true,
-      }
-    );
+    const response = await client.post("/api/auth/login", formData);
 
     setMessage(response.data.Message);
 
