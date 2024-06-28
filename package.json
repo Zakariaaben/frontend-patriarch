@@ -3,10 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev -p 4000",
+    "dev": "concurrently \"npm run start:nextdev\" \"npm run start:ngrok\"",
     "build": "next build",
-    "start": "next start -p 4000",
-    "lint": "next lint"
+    "start": "concurrently \"next start -p 4000 \" \"npm run start:ngrok\"",
+    "lint": "next lint",
+    "start:nextdev": "next dev -p 4000",
+    "start:ngrok": "node scripts/ngrok-script.js"
   },
   "dependencies": {
     "@nextui-org/spinner": "^2.0.30",
@@ -29,6 +31,7 @@
     "lucide-react": "^0.395.0",
     "next": "14.2.4",
     "next-client-cookies": "^1.1.1",
+    "ngrok": "^5.0.0-beta.2",
     "react": "^18",
     "react-dom": "^18",
     "react-spinners": "^0.13.8",

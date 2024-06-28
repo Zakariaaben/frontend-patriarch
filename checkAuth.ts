@@ -4,18 +4,16 @@ const getCookie = async (name: string) => {
   return cookies().get(name)?.value ?? "";
 };
 
-export default async function checkAuth() {
+export default async function checkAuth(host: string | null) {
   const cookie = await getCookie("jwt");
-  const response = await fetch(
-    process.env.NEXT_PUBLIC_API_URL + "/api/auth/check-auth",
-    {
-      method: "post",
-      credentials: "include",
-      headers: {
-        cookie: `jwt=${cookie}`,
-      },
-    }
-  );
+
+  const response = await fetch(`http://${host}/api/auth/check-auth`, {
+    method: "post",
+    credentials: "include",
+    headers: {
+      cookie: `jwt=${cookie}`,
+    },
+  });
 
   return response.ok;
 }

@@ -34,7 +34,8 @@ const Row = ({ favorite = false }: { favorite?: boolean }) => {
           alt="Product image"
           className="aspect-square rounded-md object-cover"
           height="64"
-          src="http://192.168.1.16:3000/api/uploads/1718447316129-131218966image3.jpg"
+          src="/api/uploads/1718447316129-131218966image3.jpg"
+          priority={true}
           width="64"
         />
       </TableCell>

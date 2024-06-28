@@ -37,6 +37,5 @@ export const handleChangeAdmin = async (
       title: "Informations Modifiées avec succès",
       description: "Nouveau nom d'utilisateur : " + formData.username,
     });
-    console.log("Informations Modifiées avec succès");
   }
 };

@@ -28,7 +28,7 @@ import React from "react";
 
 const SideNav = () => {
   const path = usePathname();
-  console.log(path);
+
   return (
     <nav className="flex flex-col items-center gap-4 px-2 py-4 w-16 border-r-2 h-screen max-sm:hidden overflow-hidden">
       <Link
