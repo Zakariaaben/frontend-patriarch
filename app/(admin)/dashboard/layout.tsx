@@ -11,11 +11,11 @@ export default function DashboardLayout({
 }) {
   return (
     <>
-      <main className="flex flex-row h-full w-full">
+      <main className="flex flex-row h-full w-full ">
         <div className="relative">
           <SideNav />
         </div>
-        <div className="flex flex-col gap-4 m-4 sm:m-2 w-full h-full ">
+        <div className="flex flex-col gap-4 mx-4 sm:m-2 h-full w-full ">
           <TopBar />
 
           <Card>{children}</Card>
