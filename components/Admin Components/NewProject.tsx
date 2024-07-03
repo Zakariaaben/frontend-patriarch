@@ -23,42 +23,76 @@ import { ScrollArea, ScrollBar } from "../ui/scroll-area";
 
 import DragNdrop from "./DragNdrop";
 import { Button } from "../ui/button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { client } from "@/utils/api/client";
-
-const types = [
-  { name: "next", id: 1 },
-  { name: "sveltekit", id: 2 },
-  { name: "astro", id: 3 },
-  { name: "nuxt", id: 4 },
-];
 
 export const NewProject = () => {
   const [files, setFiles] = useState<File[]>([]);
-  const [htmlInput, setHtmlInput] = useState(``);
+  const [htmlInput, setHtmlInput] = useState("");
   const [name, setName] = useState("");
-  const [type, setType] = useState("");
+  const [type, setType] = useState(0);
   const [date, setDate] = useState<Date | undefined>(undefined);
+  const [alert, setAlert] = useState("");
+  const [categories, setCategories] = useState<Category[]>([]);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await client.get("/api/projects/categories");
+        if (response.status === 200) {
+          setCategories(response.data);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchCategories();
+  }, []);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setAlert("");
+
+    if (name === "") {
+      setAlert("Name is required");
+      return;
+    }
+    if (type === 0) {
+      setAlert("Type is required");
+      return;
+    }
+    if (htmlInput === "") {
+      setAlert("Description is required");
+      return;
+    }
+    if (!date) {
+      setAlert("Date is required");
+      return;
+    }
+    if (files.length === 0) {
+      setAlert("Images are required");
+      return;
+    }
 
     const formData = new FormData();
     formData.append("name", name);
     formData.append("description", htmlInput);
-    formData.append("type", type);
-    formData.append("date", date?.toISOString() || "");
+    formData.append("category", type.toString());
+    formData.append("date", date?.toISOString());
     files.forEach((file) => formData.append("images", file));
 
-    console.log(formData.get("name"));
-    console.log(formData.get("description"));
-    console.log(formData.get("type"));
-    console.log(formData.get("images"));
-    client.post("/api/projects", formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    });
+    try {
+      const response = await client.post("/api/projects", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      if (response.status === 201) {
+        console.log("Project added successfully !");
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -84,19 +118,18 @@ export const NewProject = () => {
               </div>
               <div className="flex-[1]">
                 <Label>Categorie</Label>
-                <Select>
+                <Select onValueChange={(key) => setType(Number(key))}>
                   <SelectTrigger id="framework" className="border-2">
                     <SelectValue placeholder="Select" />
                   </SelectTrigger>
                   <SelectContent position="popper">
-                    {types.map((type) => (
+                    {categories.map((category) => (
                       <SelectItem
-                        key={type.id}
-                        value={type.name}
+                        key={category.id}
+                        value={category.id.toString()}
                         className="cursor-pointer"
-                        onClick={() => setType(type.name)}
                       >
-                        {type.name}
+                        {category.name}
                       </SelectItem>
                     ))}
                   </SelectContent>
@@ -123,6 +156,11 @@ export const NewProject = () => {
             </div>
 
             <CardFooter className="flex justify-end p-0">
+              {alert && (
+                <div className="text-red-500 text-sm font-semibold">
+                  {alert}
+                </div>
+              )}
               <Button className="text-white rounded-lg p-4 m-2 " type="submit">
                 Ajouter Le Projet
               </Button>

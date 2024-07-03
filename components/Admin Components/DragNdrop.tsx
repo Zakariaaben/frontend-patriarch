@@ -68,7 +68,7 @@ export default function DragNdrop({
         {(provided) => (
           <div
             className={
-              "h-[150px] bg-slate-100 flex items-center min-w-[400px] rounded-lg  p-4 my-4"
+              "h-[150px] bg-slate-100 flex items-center min-w-[400px] rounded-lg  p-4 my-4 "
             }
             {...provided.droppableProps}
             ref={provided.innerRef}

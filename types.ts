@@ -13,3 +13,8 @@ interface AdminFormType {
   username: string;
   password: string;
 }
+
+interface Category {
+  name: string;
+  id: number;
+}
