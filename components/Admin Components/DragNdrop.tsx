@@ -21,7 +21,7 @@ import { ImageDown, X } from "lucide-react";
 export default function DragNdrop({
   fileGetter,
 }: {
-  fileGetter?: Dispatch<SetStateAction<File[]>>;
+  fileGetter?: (theFiles: File[]) => void;
 }) {
   const [cashedImages, setCashedImages] = useState<string[]>([]);
   const [finalFiles, setFinalFiles] = useState<File[]>([]);
@@ -60,7 +60,7 @@ export default function DragNdrop({
 
   useEffect(() => {
     if (fileGetter) fileGetter(finalFiles);
-  }, [finalFiles]);
+  }, [finalFiles, fileGetter]);
 
   return (
     <DragDropContext onDragEnd={handleDragEnd}>

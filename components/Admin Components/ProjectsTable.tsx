@@ -17,50 +17,41 @@ import {
 } from "../ui/dropdown-menu";
 import { Button } from "../ui/button";
 import { MoreHorizontal, Star } from "lucide-react";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "../ui/card";
-import { ScrollArea } from "../ui/scroll-area";
+import { CardContent } from "../ui/card";
 
-const Row = ({ favorite = false }: { favorite?: boolean }) => {
+const Row = ({ project }: { project: Project }) => {
   return (
     <TableRow className="">
       <TableCell className="hidden md:table-cell ">
         <Image
           alt="Product image"
           className="aspect-square rounded-md object-cover"
-          height="64"
-          src="/api/uploads/1718447316129-131218966image3.jpg"
+          height="70"
+          src={`/api/${project.images[0]}`}
           priority={true}
-          width="64"
+          width="70"
         />
       </TableCell>
       <TableCell className="font-medium relative">
         <div className="sm:hidden">
-          {favorite && (
-            <Star className="absolute top-3 right-4 h-4 fill-black" />
-          )}
+          {
+            /* {favorite && ( */ <Star className="absolute top-3 right-4 h-4 fill-black" />
+          }
         </div>
-        Laser Lemonade Machine
+        <div className="text-lg">{project.name}</div>
       </TableCell>
       <TableCell>
-        <div>Ceci est une petite description du projet</div>
+        <div>{project.description.slice(0, 100)}</div>
       </TableCell>
       <TableCell className="hidden md:table-cell">
-        2023-07-12 10:42 AM
+        {new Date(project.date).toDateString()}
       </TableCell>
-      <TableCell className="hidden md:table-cell">
-        2023-07-12 10:42 AM
-      </TableCell>
+      <TableCell className="hidden md:table-cell">{project.category}</TableCell>
       <TableCell className="hidden md:table-cell">
         <Star
           className={
-            "h-10 cursor-pointer  transition-all  hover:fill-slate-600 text-slate-600 " +
-            (favorite ? "fill-slate-600" : "fill-slate-white")
+            "h-10 cursor-pointer  transition-all  hover:fill-slate-600 text-slate-600 " // +
+            // (favorite ? "fill-slate-600" : "fill-slate-white")
           }
         />
       </TableCell>
@@ -93,7 +84,7 @@ const Row = ({ favorite = false }: { favorite?: boolean }) => {
   );
 };
 
-function ProjectsTable({ projects }: { projects?: any[] }) {
+function ProjectsTable({ projects }: { projects: Project[] }) {
   return (
     <CardContent>
       <Table className="">
@@ -105,7 +96,7 @@ function ProjectsTable({ projects }: { projects?: any[] }) {
             <TableHead>Nom</TableHead>
             <TableHead>Description</TableHead>
             <TableHead className="hidden md:table-cell">Date</TableHead>
-            <TableHead className="hidden md:table-cell">Created at</TableHead>
+            <TableHead className="hidden md:table-cell">Catégorie</TableHead>
             <TableHead className="hidden w-[100px] md:table-cell">
               <span className="sr-only">Favoris</span>
             </TableHead>
@@ -116,15 +107,9 @@ function ProjectsTable({ projects }: { projects?: any[] }) {
         </TableHeader>
 
         <TableBody className="rounded-lg">
-          <Row favorite={true} />
-          <Row />
-          <Row />
-          <Row />
-          <Row />
-          <Row />
-          <Row />
-          <Row />
-          <Row />
+          {projects.map((project, index) => {
+            return <Row project={project} key={index} />;
+          })}
         </TableBody>
       </Table>
     </CardContent>

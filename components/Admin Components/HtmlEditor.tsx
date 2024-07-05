@@ -1,10 +1,11 @@
 "use client";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import DOMPurify from "dompurify";
+import { Dispatch, SetStateAction, useEffect } from "react";
+
 import "ace-builds";
 import "ace-builds/src-noconflict/mode-html";
 import "ace-builds/src-noconflict/theme-monokai";
 import AceEditor from "react-ace";
+import DOMPurify from "isomorphic-dompurify";
 
 export const HtmlEditor = ({
   className,
@@ -33,15 +34,10 @@ export const HtmlEditor = ({
         `);
   }, []);
 
-  const [cleanHTML, setCleanHTML] = useState("");
-
   const handleHtmlChange = (value: string) => {
     setHtmlInput(value);
   };
-
-  useEffect(() => {
-    setCleanHTML(DOMPurify.sanitize(htmlInput));
-  }, [htmlInput]);
+  const cleanHTML = DOMPurify.sanitize(htmlInput);
 
   return (
     <>

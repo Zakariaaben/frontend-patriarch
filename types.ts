@@ -4,9 +4,13 @@ interface AdminUser {
 }
 
 interface Project {
+  id: number;
   name: string;
   description: string;
+  date: string;
+  category: string;
   images: string[];
+  created_at: string;
 }
 
 interface AdminFormType {

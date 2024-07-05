@@ -7,7 +7,7 @@ const getCookie = async (name: string) => {
 export default async function checkAuth(host: string | null) {
   const cookie = await getCookie("jwt");
 
-  const response = await fetch(`http://localhost:3000/api/auth/check-auth`, {
+  const response = await fetch(`http://localhost:4000/api/auth/check-auth`, {
     method: "post",
     credentials: "include",
     headers: {

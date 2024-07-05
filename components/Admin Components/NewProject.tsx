@@ -23,8 +23,13 @@ import { ScrollArea, ScrollBar } from "../ui/scroll-area";
 
 import DragNdrop from "./DragNdrop";
 import { Button } from "../ui/button";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { client } from "@/utils/api/client";
+
+import { useRouter } from "next/navigation";
+import { useToast } from "../ui/use-toast";
+import { MoonLoader } from "react-spinners";
+import { CheckIcon } from "lucide-react";
 
 export const NewProject = () => {
   const [files, setFiles] = useState<File[]>([]);
@@ -34,6 +39,13 @@ export const NewProject = () => {
   const [date, setDate] = useState<Date | undefined>(undefined);
   const [alert, setAlert] = useState("");
   const [categories, setCategories] = useState<Category[]>([]);
+  const [loading, setLoading] = useState(false);
+  const { toast } = useToast();
+  const router = useRouter();
+
+  const fileGetter = useCallback((theFiles: File[]) => {
+    setFiles(theFiles);
+  }, []);
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -54,25 +66,27 @@ export const NewProject = () => {
     setAlert("");
 
     if (name === "") {
-      setAlert("Name is required");
+      setAlert("Veuillez entrer un nom de projet");
       return;
     }
     if (type === 0) {
-      setAlert("Type is required");
+      setAlert("Veuillez entrer un type de projets");
       return;
     }
     if (htmlInput === "") {
-      setAlert("Description is required");
+      setAlert("Veuillez entrer un type de projets");
       return;
     }
     if (!date) {
-      setAlert("Date is required");
+      setAlert("Veuillez entrer la date du projet");
       return;
     }
     if (files.length === 0) {
-      setAlert("Images are required");
+      setAlert("Veuillez entrer les images du projet");
       return;
     }
+
+    setLoading(true);
 
     const formData = new FormData();
     formData.append("name", name);
@@ -89,9 +103,40 @@ export const NewProject = () => {
       });
       if (response.status === 201) {
         console.log("Project added successfully !");
+
+        toast({
+          action: (
+            <div className="flex flex-col w-full gap-2">
+              <div className="w-full flex items-center gap-2">
+                <span className="first-letter:capitalize font-semibold text-lg">
+                  Projet ajouté avec succés
+                </span>
+                <CheckIcon className="mr-2 text-green-500" />
+              </div>
+
+              <pre className="bg-black w-full text-green-500 p-4 rounded-lg">
+                {JSON.stringify(
+                  {
+                    nom: name,
+                    categorie: type,
+                    date: date?.toDateString(),
+                  },
+                  null,
+                  2
+                )}
+              </pre>
+            </div>
+          ),
+          className: "p-4 pl-2",
+        });
+        router.push("/dashboard/projets");
+        router.refresh();
+        setLoading(false);
       }
     } catch (error) {
       console.error(error);
+      setAlert("Erreur: Projet Non ajouté");
+      setLoading(false);
     }
   };
 
@@ -139,7 +184,7 @@ export const NewProject = () => {
 
             <div className=" flex items-center gap-6">
               <ScrollArea>
-                <DragNdrop fileGetter={setFiles} />
+                <DragNdrop fileGetter={fileGetter} />
                 <ScrollBar orientation="horizontal" />
               </ScrollArea>
               <div className="ml-auto">
@@ -157,12 +202,24 @@ export const NewProject = () => {
 
             <CardFooter className="flex justify-end p-0">
               {alert && (
-                <div className="text-red-500 text-sm font-semibold">
+                <div className="text-red-500 text-lg font-semibold">
                   {alert}
                 </div>
               )}
-              <Button className="text-white rounded-lg p-4 m-2 " type="submit">
-                Ajouter Le Projet
+              <Button
+                type="submit"
+                className={`flex gap-4 items-center justify-center transition-all duration-200 ease-in-out ${
+                  loading ? "px-4" : "px-2"
+                }`}
+              >
+                <div>Ajouter le projet</div>
+                {loading && (
+                  <MoonLoader
+                    color={"#ffffff"}
+                    speedMultiplier={0.5}
+                    size={20}
+                  />
+                )}
               </Button>
             </CardFooter>
           </form>

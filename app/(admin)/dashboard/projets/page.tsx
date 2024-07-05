@@ -1,11 +1,14 @@
-import MobileSideNav from "@/components/Admin Components/MobileSideNav";
 import ProjectsTable from "@/components/Admin Components/ProjectsTable";
 import { CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Plus, PlusCircle, PlusSquare } from "lucide-react";
+import { client } from "@/utils/api/client";
+import { PlusCircle } from "lucide-react";
 import Link from "next/link";
 
-const Page = () => {
+const Page = async () => {
+  const response = await client.get("http://localhost:4000/api/projects");
+  const Projects: Project[] = response.data;
+
   return (
     <>
       <CardHeader>
@@ -22,7 +25,7 @@ const Page = () => {
         </div>
       </CardHeader>
       <ScrollArea className="h-[calc(100vh-12rem)] w-full border-t-2 border-slate-400">
-        <ProjectsTable />
+        <ProjectsTable projects={Projects} />
       </ScrollArea>
     </>
   );
