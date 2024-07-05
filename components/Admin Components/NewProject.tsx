@@ -65,12 +65,12 @@ export const NewProject = () => {
       setAlert("Veuillez entrer un nom de projet");
       return;
     }
-    if (type === 0) {
-      setAlert("Veuillez entrer un type de projets");
+    if (type == 0) {
+      setAlert("Veuillez entrer un type de projet");
       return;
     }
     if (htmlInput === "") {
-      setAlert("Veuillez entrer un type de projets");
+      setAlert("Veuillez entrer une description de projet");
       return;
     }
     if (!date) {
@@ -192,7 +192,7 @@ export const NewProject = () => {
               <HtmlEditor className="p-2" contentGetter={setHtmlInput} />
             </div>
 
-            <CardFooter className="flex justify-end p-0">
+            <CardFooter className="flex justify-end p-0 gap-2">
               {alert && (
                 <div className="text-red-500 text-lg font-semibold">
                   {alert}

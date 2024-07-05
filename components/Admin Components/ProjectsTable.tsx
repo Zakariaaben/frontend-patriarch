@@ -18,6 +18,7 @@ import {
 import { Button } from "../ui/button";
 import { MoreHorizontal, Star } from "lucide-react";
 import { CardContent } from "../ui/card";
+import Link from "next/link";
 
 const Row = ({ project }: { project: Project }) => {
   return (
@@ -71,9 +72,11 @@ const Row = ({ project }: { project: Project }) => {
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuItem className="cursor-pointer">Edit</DropdownMenuItem>
-            <DropdownMenuItem className="cursor-pointer">
-              Delete
-            </DropdownMenuItem>
+            <Link href={`/dashboard/projets/supprimer/` + project.id}>
+              <DropdownMenuItem className="cursor-pointer">
+                Delete
+              </DropdownMenuItem>
+            </Link>
             <DropdownMenuItem className="cursor-pointer md:hidden">
               Ajouter aux favoris
             </DropdownMenuItem>

@@ -1,13 +1,16 @@
 import ProjectsTable from "@/components/Admin Components/ProjectsTable";
 import { CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { client } from "@/utils/api/client";
 import { PlusCircle } from "lucide-react";
+import { revalidatePath } from "next/cache";
 import Link from "next/link";
 
 const Page = async () => {
-  const response = await client.get("http://localhost:3000/api/projects");
-  const Projects: Project[] = response.data;
+  revalidatePath("/dashboard/projets");
+  const response = await fetch("http://localhost:3000/api/projects", {
+    method: "GET",
+  });
+  const Projects: Project[] = await response.json();
 
   return (
     <>
@@ -19,7 +22,7 @@ const Page = async () => {
               Manage your Projects and view their performance.
             </CardDescription>
           </div>
-          <Link href="/dashboard/projets/nouveau">
+          <Link href="/dashboard/projets/ajouter">
             <PlusCircle className="m-2 " size={28} />
           </Link>
         </div>

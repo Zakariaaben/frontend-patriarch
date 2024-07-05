@@ -1,5 +1,5 @@
 "use client";
-import { Dispatch, useState } from "react";
+import { Dispatch, useEffect, useState } from "react";
 
 import "ace-builds";
 import "ace-builds/src-noconflict/mode-html";
@@ -30,6 +30,7 @@ export const HtmlEditor = ({
     
         </div>
         `);
+  if (contentGetter) useEffect(() => contentGetter(htmlInput), [htmlInput]);
 
   const cleanHTML = DOMPurify.sanitize(htmlInput);
 
@@ -41,7 +42,6 @@ export const HtmlEditor = ({
           theme="monokai"
           onChange={(value) => {
             setHtmlInput(value);
-            if (contentGetter) contentGetter(value);
           }}
           name="html-editor"
           editorProps={{ $blockScrolling: true }}
