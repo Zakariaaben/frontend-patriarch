@@ -23,7 +23,7 @@ import { ScrollArea, ScrollBar } from "../ui/scroll-area";
 
 import DragNdrop from "./DragNdrop";
 import { Button } from "../ui/button";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { client } from "@/utils/api/client";
 
 import { useRouter } from "next/navigation";
@@ -42,10 +42,6 @@ export const NewProject = () => {
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
   const router = useRouter();
-
-  const fileGetter = useCallback((theFiles: File[]) => {
-    setFiles(theFiles);
-  }, []);
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -184,7 +180,7 @@ export const NewProject = () => {
 
             <div className=" flex items-center gap-6">
               <ScrollArea>
-                <DragNdrop fileGetter={fileGetter} />
+                <DragNdrop fileGetter={setFiles} />
                 <ScrollBar orientation="horizontal" />
               </ScrollArea>
               <div className="ml-auto">
@@ -193,11 +189,7 @@ export const NewProject = () => {
             </div>
             <div className="w-100% ">
               <h2 className="text-xl py-2 font-semibold">Description</h2>
-              <HtmlEditor
-                className="p-2"
-                htmlInput={htmlInput}
-                setHtmlInput={setHtmlInput}
-              />
+              <HtmlEditor className="p-2" contentGetter={setHtmlInput} />
             </div>
 
             <CardFooter className="flex justify-end p-0">

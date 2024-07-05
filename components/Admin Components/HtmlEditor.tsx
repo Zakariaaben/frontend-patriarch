@@ -1,23 +1,21 @@
 "use client";
-import { Dispatch, SetStateAction, useEffect } from "react";
+import { Dispatch, useState } from "react";
 
 import "ace-builds";
 import "ace-builds/src-noconflict/mode-html";
 import "ace-builds/src-noconflict/theme-monokai";
 import AceEditor from "react-ace";
 import DOMPurify from "isomorphic-dompurify";
+import { SetStateAction } from "jotai";
 
 export const HtmlEditor = ({
   className,
-  htmlInput,
-  setHtmlInput,
+  contentGetter,
 }: {
   className?: string;
-  htmlInput: string;
-  setHtmlInput: Dispatch<SetStateAction<string>>;
+  contentGetter?: Dispatch<SetStateAction<string>>;
 }) => {
-  useEffect(() => {
-    setHtmlInput(`
+  const [htmlInput, setHtmlInput] = useState(`
         <div class="px-4 sm:px-8 py-2">
     
         <h2 style="font-size: 28px ;line-height: 1.75rem; font-weight:600;">
@@ -32,11 +30,7 @@ export const HtmlEditor = ({
     
         </div>
         `);
-  }, []);
 
-  const handleHtmlChange = (value: string) => {
-    setHtmlInput(value);
-  };
   const cleanHTML = DOMPurify.sanitize(htmlInput);
 
   return (
@@ -45,7 +39,10 @@ export const HtmlEditor = ({
         <AceEditor
           mode="html"
           theme="monokai"
-          onChange={handleHtmlChange}
+          onChange={(value) => {
+            setHtmlInput(value);
+            if (contentGetter) contentGetter(value);
+          }}
           name="html-editor"
           editorProps={{ $blockScrolling: true }}
           height="400px"

@@ -6,7 +6,7 @@ import { PlusCircle } from "lucide-react";
 import Link from "next/link";
 
 const Page = async () => {
-  const response = await client.get("http://localhost:4000/api/projects");
+  const response = await client.get("http://localhost:3000/api/projects");
   const Projects: Project[] = response.data;
 
   return (
