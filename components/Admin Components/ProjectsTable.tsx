@@ -47,7 +47,9 @@ const Row = ({ project }: { project: Project }) => {
       <TableCell className="hidden md:table-cell">
         {new Date(project.date).toDateString()}
       </TableCell>
-      <TableCell className="hidden md:table-cell">{project.category}</TableCell>
+      <TableCell className="hidden md:table-cell">
+        {project.category.name}
+      </TableCell>
       <TableCell className="hidden md:table-cell">
         <Star
           className={
@@ -71,7 +73,11 @@ const Row = ({ project }: { project: Project }) => {
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem className="cursor-pointer">Edit</DropdownMenuItem>
+            <Link href={`/dashboard/projets/editer/` + project.id}>
+              <DropdownMenuItem className="cursor-pointer">
+                Edit
+              </DropdownMenuItem>
+            </Link>
             <Link href={`/dashboard/projets/supprimer/` + project.id}>
               <DropdownMenuItem className="cursor-pointer">
                 Delete

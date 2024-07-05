@@ -8,7 +8,7 @@ interface Project {
   name: string;
   description: string;
   date: string;
-  category: string;
+  category: Category;
   images: string[];
   created_at: string;
 }

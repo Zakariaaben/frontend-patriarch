@@ -31,9 +31,25 @@ import { useToast } from "../ui/use-toast";
 import { MoonLoader } from "react-spinners";
 import { CheckIcon } from "lucide-react";
 
+const initialContent = `
+        <div class="px-4 sm:px-8 py-2">
+    
+        <h2 style="font-size: 28px ;line-height: 1.75rem; font-weight:600;">
+        Sous-titre de la section
+        </h2>
+    
+        <p style="font-size:1.25rem ;font-weight:500; margin-top:5px; text-align:justify;" >
+        &emsp;Lorem Ipsum <i>CE TEXTE EST EN ITALIQUE</i> of the printing and typesetting industry. Lorem Ipsum has been the industry's <span style="color:red">CE TEXTE EST EN COULEUR</span>  since the 1500s, when an unknown printer took a galley of type and <strong>CE TEXTE EST EN GRAS</strong> it to make a type.
+        <br>
+        &emsp;Ceci est un saut de ligne
+        </p>
+    
+        </div>
+        `;
+
 export const NewProject = () => {
   const [files, setFiles] = useState<File[]>([]);
-  const [htmlInput, setHtmlInput] = useState("");
+  const [htmlInput, setHtmlInput] = useState(initialContent);
   const [name, setName] = useState("");
   const [type, setType] = useState(0);
   const [date, setDate] = useState<Date | undefined>(undefined);
@@ -114,7 +130,7 @@ export const NewProject = () => {
                 {JSON.stringify(
                   {
                     nom: name,
-                    categorie: type,
+                    categorie: categories[type - 1].name,
                     date: date?.toDateString(),
                   },
                   null,
@@ -189,7 +205,11 @@ export const NewProject = () => {
             </div>
             <div className="w-100% ">
               <h2 className="text-xl py-2 font-semibold">Description</h2>
-              <HtmlEditor className="p-2" contentGetter={setHtmlInput} />
+              <HtmlEditor
+                className="p-2"
+                contentGetter={setHtmlInput}
+                initialContent={htmlInput}
+              />
             </div>
 
             <CardFooter className="flex justify-end p-0 gap-2">
