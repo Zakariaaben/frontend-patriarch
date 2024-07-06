@@ -3,11 +3,17 @@ import { TriangleAlert } from "lucide-react";
 import { Button } from "../ui/button";
 import Link from "next/link";
 import { client } from "@/utils/api/client";
+import { useRouter } from "next/navigation";
 
 const DeleteProject = ({ project }: { project: Project }) => {
+  const router = useRouter();
   const handleDelete = async () => {
     const response = await client.delete("/api/projects/" + project.id);
     console.log(response.data);
+    if (response.status === 200) {
+      router.push("/dashboard");
+      router.refresh();
+    }
   };
 
   return (

@@ -15,10 +15,22 @@ import {
 
 export function DatePicker({
   dateGetter,
+  initialDate,
 }: {
   dateGetter?: React.Dispatch<React.SetStateAction<Date | undefined>>;
+  initialDate?: Date;
 }) {
   const [date, setDate] = React.useState<Date>();
+
+  React.useEffect(() => {
+    if (initialDate) {
+      setDate(initialDate);
+      console.log(date);
+    }
+    if (dateGetter) {
+      dateGetter(date);
+    }
+  }, [date]);
 
   return (
     <Popover>

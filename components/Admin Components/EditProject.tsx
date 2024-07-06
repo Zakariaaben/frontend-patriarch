@@ -31,22 +31,22 @@ import { useToast } from "../ui/use-toast";
 import { MoonLoader } from "react-spinners";
 import { CheckIcon } from "lucide-react";
 import { Checkbox } from "../ui/checkbox";
+import moment from "moment";
 
 export const EditProject = ({ project }: { project: Project }) => {
   const [files, setFiles] = useState<File[]>([]);
   const [htmlInput, setHtmlInput] = useState(project.description);
   const [name, setName] = useState(project.name);
   const [date, setDate] = useState<Date | undefined>(new Date(project.date));
-  const [alert, setAlert] = useState("");
+  const [type, setType] = useState(project.category.id || 0);
   const [loading, setLoading] = useState(false);
+  const [alert, setAlert] = useState("");
   const { toast } = useToast();
   const router = useRouter();
-  const [type, setType] = useState(project.category.id || 0);
   const [modifyImages, setModifyImages] = useState(false);
 
   const [categories, setCategories] = useState<Category[]>([]);
   useEffect(() => {
-    console.log(JSON.stringify(project));
     const fetchCategories = async () => {
       try {
         const response = await client.get("/api/projects/categories");
@@ -80,7 +80,7 @@ export const EditProject = ({ project }: { project: Project }) => {
       setAlert("Veuillez entrer la date du projet");
       return;
     }
-    if (files.length === 0) {
+    if (modifyImages && files.length === 0) {
       setAlert("Veuillez entrer les images du projet");
       return;
     }
@@ -91,16 +91,21 @@ export const EditProject = ({ project }: { project: Project }) => {
     formData.append("name", name);
     formData.append("description", htmlInput);
     formData.append("category", type.toString());
-    formData.append("date", date?.toISOString());
+    formData.append("date", moment(date).format());
     files.forEach((file) => formData.append("images", file));
 
     try {
-      const response = await client.post("/api/projects", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
-      if (response.status === 201) {
+      const response = await client.put(
+        "/api/projects/" + project.id,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+
+      if (response.status === 200) {
         console.log("Project added successfully !");
 
         toast({
@@ -108,7 +113,7 @@ export const EditProject = ({ project }: { project: Project }) => {
             <div className="flex flex-col w-full gap-2">
               <div className="w-full flex items-center gap-2">
                 <span className="first-letter:capitalize font-semibold text-lg">
-                  Projet ajouté avec succés
+                  Projet modifié avec succés
                 </span>
                 <CheckIcon className="mr-2 text-green-500" />
               </div>
@@ -117,7 +122,7 @@ export const EditProject = ({ project }: { project: Project }) => {
                 {JSON.stringify(
                   {
                     nom: name,
-                    categorie: type,
+                    categorie: categories[type - 1].name,
                     date: date?.toDateString(),
                   },
                   null,
@@ -138,6 +143,10 @@ export const EditProject = ({ project }: { project: Project }) => {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    console.log(date);
+  }, [date]);
 
   return (
     <>
@@ -205,16 +214,11 @@ export const EditProject = ({ project }: { project: Project }) => {
                 <ScrollBar orientation="horizontal" />
               </ScrollArea>
               <div className="ml-auto">
-                <DatePicker dateGetter={setDate} />
+                <DatePicker dateGetter={setDate} initialDate={date} />
               </div>
             </div>
             <div className="w-100% ">
-              <h2
-                className="text-xl py-2 font-semibold"
-                onClick={() => console.log(type)}
-              >
-                Description
-              </h2>
+              <h2 className="text-xl py-2 font-semibold">Description</h2>
               <HtmlEditor
                 className="p-2"
                 contentGetter={setHtmlInput}

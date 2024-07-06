@@ -30,6 +30,7 @@ import { useRouter } from "next/navigation";
 import { useToast } from "../ui/use-toast";
 import { MoonLoader } from "react-spinners";
 import { CheckIcon } from "lucide-react";
+import moment from "moment";
 
 const initialContent = `
         <div class="px-4 sm:px-8 py-2">
@@ -75,6 +76,7 @@ export const NewProject = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
     setAlert("");
 
     if (name === "") {
@@ -104,7 +106,7 @@ export const NewProject = () => {
     formData.append("name", name);
     formData.append("description", htmlInput);
     formData.append("category", type.toString());
-    formData.append("date", date?.toISOString());
+    formData.append("date", moment(date).format());
     files.forEach((file) => formData.append("images", file));
 
     try {
