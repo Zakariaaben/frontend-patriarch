@@ -5,7 +5,7 @@ export const handleLogout = async (
 ) => {
   setLoading(true);
   try {
-    await client.post("/api/auth/logout");
+    await client.get("/api/auth/logout");
     window.location.href = "/";
   } catch (error) {
     console.error(error);

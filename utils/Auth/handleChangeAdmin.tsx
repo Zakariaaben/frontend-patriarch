@@ -22,9 +22,13 @@ export const handleChangeAdmin = async (
   }
 
   try {
-    const response = await client.post("/api/auth/changeadmin", formData);
+    const response = await client.post(
+      "/api/users/changecredentials",
+      formData
+    );
+
     if (response.status === 200) {
-      await client.post("/api/auth/login", formData);
+      const response = await client.post("/api/auth/login", formData);
       setIsOpen(false);
       if (triggerChangeAdmin) triggerChangeAdmin(false);
       return router.refresh();

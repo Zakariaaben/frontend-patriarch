@@ -1,16 +1,15 @@
 "use client";
 
 import { Search, User2 } from "lucide-react";
-import { Input } from "../ui/input";
+import { Button } from "../ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuLabel,
   DropdownMenuSeparator,
-  DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
-import { Button } from "../ui/button";
+import { Input } from "../ui/input";
 
 import Logout from "../Logout";
 
@@ -51,7 +50,7 @@ function SearchProfile({ user }: { user?: AdminUser }) {
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
               <DropdownMenuLabel className="flex items-center px-5 font-semibold text-lg">
-                {user?.username}
+                {user!.username}
               </DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuItem className="outline-none">
