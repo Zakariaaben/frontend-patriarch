@@ -26,15 +26,17 @@ export const handleChangeAdmin = async (
       "/api/users/changecredentials",
       formData
     );
-
-    if (response.status === 200) {
-      const response = await client.post("/api/auth/login", formData);
-      setIsOpen(false);
-      if (triggerChangeAdmin) triggerChangeAdmin(false);
-      return router.refresh();
+    console.log(response);
+    if (response.status !== 200) {
+      return setMessage(response.data.message);
     }
-  } catch (error) {
-    console.error(error);
+
+    const login = await client.post("/api/auth/login", formData);
+    setIsOpen(false);
+    if (triggerChangeAdmin) triggerChangeAdmin(false);
+    return router.refresh();
+  } catch (error: any) {
+    setMessage(error.response.data.message);
   } finally {
     setLoading(false);
     toast({

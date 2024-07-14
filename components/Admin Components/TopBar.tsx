@@ -3,7 +3,7 @@ import MobileSideNav from "./MobileSideNav";
 import SearchProfile from "./SearchProfile";
 
 const TopBar = async () => {
-  const user = await fetch("http://localhost:3000/api/auth/check-auth", {
+  const user = await fetch("http://localhost:4000/api/auth/check-auth", {
     method: "GET",
     credentials: "include",
     headers: {

@@ -7,7 +7,7 @@ import Link from "next/link";
 
 const Page = async () => {
   revalidatePath("/dashboard/projets");
-  const response = await fetch("http://localhost:3000/api/projects", {
+  const response = await fetch(`${process.env.HOST_URL}/api/projects`, {
     method: "GET",
   });
   const Projects: Project[] = await response.json();

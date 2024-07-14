@@ -6,7 +6,7 @@ import Link from "next/link";
 const Page = async ({ params }: { params: { projectId: number } }) => {
   revalidatePath("/dashboard/projets/supprimer/[projectId]", "page");
   const response = await fetch(
-    `http://localhost:3000/api/projects/${params.projectId}`
+    `${process.env.HOST_URL}/projects/${params.projectId}`
   );
   const exists = response.status;
   if (exists === 404) {
