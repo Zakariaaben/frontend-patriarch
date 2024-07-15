@@ -1,13 +1,16 @@
-import React from "react";
+import { MoreHorizontal, Star } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import {
-  TableBody,
   Table,
-  TableRow,
+  TableBody,
+  TableCell,
   TableHead,
   TableHeader,
-  TableCell,
+  TableRow,
 } from "../ui/Table";
+import { Button } from "../ui/button";
+import { CardContent } from "../ui/card";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -15,10 +18,6 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
-import { Button } from "../ui/button";
-import { MoreHorizontal, Star } from "lucide-react";
-import { CardContent } from "../ui/card";
-import Link from "next/link";
 
 const Row = ({ project }: { project: Project }) => {
   return (
@@ -27,10 +26,10 @@ const Row = ({ project }: { project: Project }) => {
         <Image
           alt="Product image"
           className="aspect-square rounded-md object-cover"
-          height="70"
-          src={`/api/${project.images[0]}`}
+          height={1920}
+          src={`/api/uploads/${project.images[0]}`}
           priority={true}
-          width="70"
+          width="1080"
         />
       </TableCell>
       <TableCell className="font-medium relative">

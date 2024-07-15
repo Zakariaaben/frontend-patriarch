@@ -4,9 +4,9 @@ import { Dispatch, useEffect, useState } from "react";
 import "ace-builds";
 import "ace-builds/src-noconflict/mode-html";
 import "ace-builds/src-noconflict/theme-monokai";
-import AceEditor from "react-ace";
 import DOMPurify from "isomorphic-dompurify";
 import { SetStateAction } from "jotai";
+import AceEditor from "react-ace";
 
 export const HtmlEditor = ({
   className,
@@ -18,7 +18,9 @@ export const HtmlEditor = ({
   initialContent?: string;
 }) => {
   const [htmlInput, setHtmlInput] = useState(initialContent || "");
-  if (contentGetter) useEffect(() => contentGetter(htmlInput), [htmlInput]);
+  useEffect(() => {
+    if (contentGetter) contentGetter(htmlInput);
+  }, [contentGetter,htmlInput]);
 
   const cleanHTML = DOMPurify.sanitize(htmlInput);
 

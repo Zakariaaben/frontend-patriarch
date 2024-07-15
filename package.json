@@ -3,12 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "concurrently \"npm run start:nextdev\" \"npm run start:ngrok\"",
+    "dev": "next dev",
     "build": "next build",
-    "start": "concurrently \"next start -p 4000 \" \"npm run start:ngrok\"",
-    "lint": "next lint",
-    "start:nextdev": "next dev -p 4000",
-    "start:ngrok": "node scripts/ngrok-script.js"
+    "start": "next start -p 4000",
+    "lint": "next lint"
   },
   "dependencies": {
     "@hello-pangea/dnd": "^16.6.0",

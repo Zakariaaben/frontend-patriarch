@@ -1,5 +1,5 @@
 "use client";
-import { Input } from "../ui/input";
+import { DatePicker } from "../DatePicker";
 import {
   Card,
   CardContent,
@@ -8,6 +8,7 @@ import {
   CardHeader,
   CardTitle,
 } from "../ui/card";
+import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import {
   Select,
@@ -17,21 +18,21 @@ import {
   SelectValue,
 } from "../ui/select";
 import { HtmlEditor } from "./HtmlEditor";
-import { DatePicker } from "../DatePicker";
 
-import { ScrollArea, ScrollBar } from "../ui/scroll-area";
+import { ScrollArea } from "../ui/scroll-area";
 
-import DragNdrop from "./DragNdrop";
-import { Button } from "../ui/button";
-import { useEffect, useState } from "react";
 import { client } from "@/utils/api/client";
+import { useEffect, useState } from "react";
+import { Button } from "../ui/button";
+import DragNdrop from "./DragNdrop";
 
-import { useRouter } from "next/navigation";
-import { useToast } from "../ui/use-toast";
-import { MoonLoader } from "react-spinners";
+import { Scrollbar } from "@radix-ui/react-scroll-area";
 import { CheckIcon } from "lucide-react";
-import { Checkbox } from "../ui/checkbox";
 import moment from "moment";
+import { useRouter } from "next/navigation";
+import { MoonLoader } from "react-spinners";
+import { Checkbox } from "../ui/checkbox";
+import { useToast } from "../ui/use-toast";
 
 export const EditProject = ({ project }: { project: Project }) => {
   const [files, setFiles] = useState<File[]>([]);
@@ -49,7 +50,7 @@ export const EditProject = ({ project }: { project: Project }) => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await client.get("/api/projects/categories");
+        const response = await client.get("/api/categories");
         if (response.status === 200) {
           setCategories(response.data);
         }
@@ -90,71 +91,58 @@ export const EditProject = ({ project }: { project: Project }) => {
     const formData = new FormData();
     formData.append("name", name);
     formData.append("description", htmlInput);
-    formData.append("category", type.toString());
+    formData.append("categoryId", type.toString());
     formData.append("date", moment(date).format());
     files.forEach((file) => formData.append("images", file));
 
-    try {
-      const response = await client.put(
-        "/api/projects/" + project.id,
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
+    const response = await client.put("/api/projects/" + project.id, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
 
-      if (response.status === 200) {
-        console.log("Project added successfully !");
-
-        toast({
-          action: (
-            <div className="flex flex-col w-full gap-2">
-              <div className="w-full flex items-center gap-2">
-                <span className="first-letter:capitalize font-semibold text-lg">
-                  Projet modifié avec succés
-                </span>
-                <CheckIcon className="mr-2 text-green-500" />
-              </div>
-
-              <pre className="bg-black w-full text-green-500 p-4 rounded-lg">
-                {JSON.stringify(
-                  {
-                    nom: name,
-                    categorie: categories[type - 1].name,
-                    date: date?.toDateString(),
-                  },
-                  null,
-                  2
-                )}
-              </pre>
+    if (response.status === 200) {
+      toast({
+        action: (
+          <div className="flex flex-col w-full gap-2">
+            <div className="w-full flex items-center gap-2">
+              <span className="first-letter:capitalize font-semibold text-md">
+                Projet modifié avec succés
+              </span>
+              <CheckIcon className="mr-2 text-green-500" />
             </div>
-          ),
-          className: "p-4 pl-2",
-        });
-        router.push("/dashboard/projets");
-        router.refresh();
-        setLoading(false);
-      }
-    } catch (error) {
-      console.error(error);
-      setAlert("Erreur: Projet Non ajouté");
-      setLoading(false);
-    }
-  };
 
-  useEffect(() => {
-    console.log(date);
-  }, [date]);
+            <pre className="bg-black w-full text-green-500 p-4 rounded-lg text-sm">
+              {JSON.stringify(
+                {
+                  nom: name,
+                  categorie: categories.find((c) => c.id === type)?.name,
+                  date: date?.toDateString(),
+                },
+                null,
+                2
+              )}
+            </pre>
+          </div>
+        ),
+        className: "p-4 pl-2",
+      });
+      router.push("/dashboard/projets");
+      router.refresh();
+      return setLoading(false);
+    }
+
+    setAlert("Erreur: " + response.data.message);
+    setLoading(false);
+  };
 
   return (
     <>
       <Card className="mx-12 ">
         <CardHeader>
-          <CardTitle>Creer un nouveau Projet</CardTitle>
+          <CardTitle>Modifier le projet</CardTitle>
           <CardDescription className="font-semibold  ">
-            Ajouter votre projet en un clic.
+            Ajouter des modifications a votre projet en un clic.
           </CardDescription>
         </CardHeader>
         <CardContent className="flex flex-col gap-6">
@@ -194,25 +182,25 @@ export const EditProject = ({ project }: { project: Project }) => {
             </div>
 
             <div className=" flex items-center gap-6">
-              <ScrollArea>
-                <div className="flex items-center gap-4">
-                  <div
-                    className={
-                      !modifyImages
-                        ? " blur-[1px] pointer-events-none opacity-70"
-                        : ""
-                    }
-                  >
+              <div className="flex items-center gap-4">
+                <div
+                  className={
+                    !modifyImages
+                      ? " blur-[1px] pointer-events-none opacity-70"
+                      : ""
+                  }
+                >
+                  <ScrollArea>
                     <DragNdrop fileGetter={setFiles} />
-                  </div>
-                  <Checkbox
-                    className="w-6 h-6 border-2 transition border-slate-800"
-                    checked={modifyImages}
-                    onCheckedChange={() => setModifyImages(!modifyImages)}
-                  />
+                    <Scrollbar orientation="horizontal" />
+                  </ScrollArea>
                 </div>
-                <ScrollBar orientation="horizontal" />
-              </ScrollArea>
+                <Checkbox
+                  className="w-6 h-6 border-2 transition border-slate-800"
+                  checked={modifyImages}
+                  onCheckedChange={() => setModifyImages(!modifyImages)}
+                />
+              </div>
               <div className="ml-auto">
                 <DatePicker dateGetter={setDate} initialDate={date} />
               </div>
@@ -234,7 +222,7 @@ export const EditProject = ({ project }: { project: Project }) => {
               )}
               <Button
                 type="submit"
-                className={`flex gap-4 items-center justify-center transition-all duration-200 ease-in-out ${
+                className={`flex gap-4 items-center justify-center transition-all duration-200 ease-in-out m-2 ${
                   loading ? "px-4" : "px-2"
                 }`}
               >

@@ -1,9 +1,7 @@
 "use client";
 import {
   ChangeEvent,
-  Dispatch,
   MouseEventHandler,
-  SetStateAction,
   useEffect,
   useRef,
   useState,
@@ -15,8 +13,8 @@ import {
   Droppable,
   OnDragEndResponder,
 } from "@hello-pangea/dnd";
-import Image from "next/image";
 import { ImageDown, X } from "lucide-react";
+import Image from "next/image";
 
 export default function DragNdrop({
   fileGetter,
@@ -68,7 +66,7 @@ export default function DragNdrop({
         {(provided) => (
           <div
             className={
-              "h-[150px] bg-slate-100 flex items-center min-w-[400px] rounded-lg  p-4 my-4 "
+              "h-[150px] bg-slate-100 flex items-center min-w-[300px] rounded-lg  p-4 my-4 max-w-[300px] sm:max-w-[1000px]  overflow-y-hidden"
             }
             {...provided.droppableProps}
             ref={provided.innerRef}
@@ -86,7 +84,7 @@ export default function DragNdrop({
                       src={img}
                       alt="images"
                       height={120}
-                      className="w-[auto]  h-[120px] rounded-lg"
+                      className="min-w-[120px] h-[120px] rounded-lg"
                       width={80}
                     />
                     <X

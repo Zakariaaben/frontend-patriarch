@@ -1,4 +1,3 @@
-import MobileSideNav from "@/components/Admin Components/MobileSideNav";
 import SideNav from "@/components/Admin Components/SideNav";
 import TopBar from "@/components/Admin Components/TopBar";
 import { Card } from "@/components/ui/card";
@@ -17,7 +16,6 @@ export default function DashboardLayout({
         </div>
         <div className="flex flex-col gap-4 mx-4 sm:m-2 h-full w-full ">
           <TopBar />
-
           <Card>{children}</Card>
         </div>
       </main>

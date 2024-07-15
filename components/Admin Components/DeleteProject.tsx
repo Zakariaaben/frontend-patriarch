@@ -19,9 +19,9 @@ const DeleteProject = ({ project }: { project: Project }) => {
     <>
       <div className="flex justify-center items-center flex-col gap-8  h-[calc(100vh-5rem)] relative">
         <TriangleAlert size={80} className=" text-red-400" />
-        <h1 className="text-4xl text-slate-600 text-center font-medium px-2 max-sm:text-3xl  ">
+        <h1 className="text-lg sm:text-2xl text-slate-600 text-center font-medium px-2 2xl:text-4xl  ">
           Êtes-vous sûr de vouloir supprimer le projet
-          <span className="font-bold"> "{project.name}" </span> ?
+          <span className="font-bold"> &quot;{project.name}&quot; </span> ?
         </h1>
 
         <div className="flex gap-8">

@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { Provider } from "jotai";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,9 +16,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="h-full w-full">
-      <body className={inter.className + "bg-red-50 "}>
-        <Provider>{children}</Provider>
-      </body>
+      <body className={inter.className + "bg-red-50 "}>{children}</body>
     </html>
   );
 }

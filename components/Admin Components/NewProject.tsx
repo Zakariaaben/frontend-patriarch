@@ -1,5 +1,5 @@
 "use client";
-import { Input } from "../ui/input";
+import { DatePicker } from "../DatePicker";
 import {
   Card,
   CardContent,
@@ -8,6 +8,7 @@ import {
   CardHeader,
   CardTitle,
 } from "../ui/card";
+import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import {
   Select,
@@ -17,20 +18,19 @@ import {
   SelectValue,
 } from "../ui/select";
 import { HtmlEditor } from "./HtmlEditor";
-import { DatePicker } from "../DatePicker";
 
 import { ScrollArea, ScrollBar } from "../ui/scroll-area";
 
-import DragNdrop from "./DragNdrop";
-import { Button } from "../ui/button";
-import { useEffect, useState } from "react";
 import { client } from "@/utils/api/client";
+import { useEffect, useState } from "react";
+import { Button } from "../ui/button";
+import DragNdrop from "./DragNdrop";
 
-import { useRouter } from "next/navigation";
-import { useToast } from "../ui/use-toast";
-import { MoonLoader } from "react-spinners";
 import { CheckIcon } from "lucide-react";
 import moment from "moment";
+import { useRouter } from "next/navigation";
+import { MoonLoader } from "react-spinners";
+import { useToast } from "../ui/use-toast";
 
 const initialContent = `
         <div class="px-4 sm:px-8 py-2">
@@ -63,7 +63,7 @@ export const NewProject = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await client.get("/api/projects/categories");
+        const response = await client.get("/api/categories");
         if (response.status === 200) {
           setCategories(response.data);
         }
@@ -105,53 +105,50 @@ export const NewProject = () => {
     const formData = new FormData();
     formData.append("name", name);
     formData.append("description", htmlInput);
-    formData.append("category", type.toString());
+    formData.append("categoryId", type.toString());
     formData.append("date", moment(date).format());
     files.forEach((file) => formData.append("images", file));
 
-    try {
-      const response = await client.post("/api/projects", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
-      if (response.status === 201) {
-        console.log("Project added successfully !");
+    const response = await client.post("/api/projects", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    if (response.status === 201) {
+      console.log("Project added successfully !");
 
-        toast({
-          action: (
-            <div className="flex flex-col w-full gap-2">
-              <div className="w-full flex items-center gap-2">
-                <span className="first-letter:capitalize font-semibold text-lg">
-                  Projet ajouté avec succés
-                </span>
-                <CheckIcon className="mr-2 text-green-500" />
-              </div>
-
-              <pre className="bg-black w-full text-green-500 p-4 rounded-lg">
-                {JSON.stringify(
-                  {
-                    nom: name,
-                    categorie: categories[type - 1].name,
-                    date: date?.toDateString(),
-                  },
-                  null,
-                  2
-                )}
-              </pre>
+      toast({
+        action: (
+          <div className="flex flex-col w-full gap-2">
+            <div className="w-full flex items-center gap-2">
+              <span className="first-letter:capitalize font-semibold text-lg">
+                Projet ajouté avec succés
+              </span>
+              <CheckIcon className="mr-2 text-green-500" />
             </div>
-          ),
-          className: "p-4 pl-2",
-        });
-        router.push("/dashboard/projets");
-        router.refresh();
-        setLoading(false);
-      }
-    } catch (error) {
-      console.error(error);
-      setAlert("Erreur: Projet Non ajouté");
-      setLoading(false);
+
+            <pre className="bg-black w-full text-green-500 p-4 rounded-lg">
+              {JSON.stringify(
+                {
+                  nom: name,
+                  categorie: categories.find((cat) => cat.id === type)?.name,
+                  date: date?.toDateString(),
+                },
+                null,
+                2
+              )}
+            </pre>
+          </div>
+        ),
+        className: "p-4 pl-2",
+      });
+      router.push("/dashboard/projets");
+      router.refresh();
+      return setLoading(false);
     }
+
+    setAlert("Erreur: Projet Non ajouté");
+    return setLoading(false);
   };
 
   return (
@@ -196,8 +193,8 @@ export const NewProject = () => {
               </div>
             </div>
 
-            <div className=" flex items-center gap-6">
-              <ScrollArea>
+            <div className=" flex items-center gap-6 flex-col sm:flex-row">
+              <ScrollArea >
                 <DragNdrop fileGetter={setFiles} />
                 <ScrollBar orientation="horizontal" />
               </ScrollArea>

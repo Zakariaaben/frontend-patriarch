@@ -1,14 +1,15 @@
 "use client";
 import {
-  Home,
   LineChart,
   ListTodo,
   Package,
   Package2,
-  ShoppingCart,
+  SquareStackIcon,
   Users2,
 } from "lucide-react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import React from "react";
 import {
   Tooltip,
   TooltipContent,
@@ -18,13 +19,11 @@ import {
 
 const Links = [
   { link: "Projets", icon: <ListTodo /> },
-  { link: "Services", icon: <ShoppingCart /> },
+  { link: "Categories", icon: <SquareStackIcon /> },
   { link: "Products", icon: <Package /> },
   { link: "Customers", icon: <Users2 /> },
   { link: "Analytics", icon: <LineChart /> },
 ];
-import { usePathname } from "next/navigation";
-import React from "react";
 
 const SideNav = () => {
   const path = usePathname();
