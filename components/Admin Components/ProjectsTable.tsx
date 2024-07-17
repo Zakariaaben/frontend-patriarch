@@ -40,15 +40,13 @@ const Row = ({ project }: { project: Project }) => {
         </div>
         <div className="text-lg">{project.name}</div>
       </TableCell>
-      <TableCell>
+      <TableCell className="hidden md:table-cell">
         <div>{project.description.slice(0, 100)}</div>
       </TableCell>
       <TableCell className="hidden md:table-cell">
         {new Date(project.date).toDateString()}
       </TableCell>
-      <TableCell className="hidden md:table-cell">
-        {project.category.name}
-      </TableCell>
+      <TableCell>{project.category.name}</TableCell>
       <TableCell className="hidden md:table-cell">
         <Star
           className={
@@ -102,9 +100,9 @@ function ProjectsTable({ projects }: { projects: Project[] }) {
               <span className="sr-only">Image</span>
             </TableHead>
             <TableHead>Nom</TableHead>
-            <TableHead>Description</TableHead>
+            <TableHead className="hidden md:table-cell">Description</TableHead>
             <TableHead className="hidden md:table-cell">Date</TableHead>
-            <TableHead className="hidden md:table-cell">Catégorie</TableHead>
+            <TableHead>Catégorie</TableHead>
             <TableHead className="hidden w-[100px] md:table-cell">
               <span className="sr-only">Favoris</span>
             </TableHead>

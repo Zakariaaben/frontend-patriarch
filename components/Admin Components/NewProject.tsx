@@ -107,53 +107,63 @@ export const NewProject = () => {
     formData.append("description", htmlInput);
     formData.append("categoryId", type.toString());
     formData.append("date", moment(date).format());
-    files.forEach((file) => formData.append("images", file));
 
-    const response = await client.post("/api/projects", formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
+    files.forEach((file) => {
+      formData.append("images", file);
     });
-    if (response.status === 201) {
-      console.log("Project added successfully !");
-
-      toast({
-        action: (
-          <div className="flex flex-col w-full gap-2">
-            <div className="w-full flex items-center gap-2">
-              <span className="first-letter:capitalize font-semibold text-lg">
-                Projet ajouté avec succés
-              </span>
-              <CheckIcon className="mr-2 text-green-500" />
-            </div>
-
-            <pre className="bg-black w-full text-green-500 p-4 rounded-lg">
-              {JSON.stringify(
-                {
-                  nom: name,
-                  categorie: categories.find((cat) => cat.id === type)?.name,
-                  date: date?.toDateString(),
-                },
-                null,
-                2
-              )}
-            </pre>
-          </div>
-        ),
-        className: "p-4 pl-2",
+    try {
+      const response = await client.post("/api/projects", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+        onDownloadProgress: (progressEvent) => {
+          console.log(
+            "Upload Progress: " + Math.round(progressEvent.loaded) + "%"
+          );
+        },
       });
-      router.push("/dashboard/projets");
-      router.refresh();
-      return setLoading(false);
-    }
 
-    setAlert("Erreur: Projet Non ajouté");
-    return setLoading(false);
+      if (response.status === 201) {
+        console.log("Project added successfully !");
+        toast({
+          action: (
+            <div className="flex flex-col w-full gap-2">
+              <div className="w-full flex items-center gap-2">
+                <span className="first-letter:capitalize font-semibold text-lg">
+                  Projet ajouté avec succés
+                </span>
+                <CheckIcon className="mr-2 text-green-500" />
+              </div>
+
+              <pre className="bg-black w-full text-green-500 p-4 rounded-lg">
+                {JSON.stringify(
+                  {
+                    nom: name,
+                    categorie: categories.find((cat) => cat.id === type)?.name,
+                    date: date?.toDateString(),
+                  },
+                  null,
+                  2
+                )}
+              </pre>
+            </div>
+          ),
+          className: "p-4 pl-2",
+        });
+        router.push("/dashboard/projets");
+        router.refresh();
+        return setLoading(false);
+      }
+    } catch (error) {
+      console.error(error);
+      setAlert("Erreur: Projet Non ajouté");
+      setLoading(false);
+    }
   };
 
   return (
     <>
-      <Card className="mx-12 ">
+      <Card className="mx-2 md:mx-12">
         <CardHeader>
           <CardTitle>Creer un nouveau Projet</CardTitle>
           <CardDescription className="font-semibold  ">
@@ -194,7 +204,7 @@ export const NewProject = () => {
             </div>
 
             <div className=" flex items-center gap-6 flex-col sm:flex-row">
-              <ScrollArea >
+              <ScrollArea>
                 <DragNdrop fileGetter={setFiles} />
                 <ScrollBar orientation="horizontal" />
               </ScrollArea>

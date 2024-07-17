@@ -138,7 +138,7 @@ export const EditProject = ({ project }: { project: Project }) => {
 
   return (
     <>
-      <Card className="mx-12 ">
+      <Card className="mx-2 md:mx-12">
         <CardHeader>
           <CardTitle>Modifier le projet</CardTitle>
           <CardDescription className="font-semibold  ">
@@ -181,8 +181,8 @@ export const EditProject = ({ project }: { project: Project }) => {
               </div>
             </div>
 
-            <div className=" flex items-center gap-6">
-              <div className="flex items-center gap-4">
+            <div className=" flex flex-col sm:flex-row items-center gap-6">
+              <div className="flex  items-center gap-4">
                 <div
                   className={
                     !modifyImages

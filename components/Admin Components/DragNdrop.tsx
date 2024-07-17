@@ -84,7 +84,7 @@ export default function DragNdrop({
                       src={img}
                       alt="images"
                       height={120}
-                      className="min-w-[120px] h-[120px] rounded-lg"
+                      className="min-w-[120px] h-[120px] rounded-lg object-contain"
                       width={80}
                     />
                     <X

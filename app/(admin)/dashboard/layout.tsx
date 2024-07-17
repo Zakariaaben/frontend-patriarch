@@ -14,7 +14,7 @@ export default function DashboardLayout({
         <div className="relative">
           <SideNav />
         </div>
-        <div className="flex flex-col gap-4 mx-4 sm:m-2 h-full w-full ">
+        <div className="flex flex-col gap-4 px-4  sm:m-2 h-full w-full ">
           <TopBar />
           <Card>{children}</Card>
         </div>
