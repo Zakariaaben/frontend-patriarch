@@ -106,7 +106,7 @@ const Navbar = () => {
               </div>
               <div className="grid gap-8 py-8 px-4">
                 {links.map((link, key) => (
-                  <SheetClose asChild>
+                  <SheetClose asChild key={key}>
                     <Link
                       key={key}
                       href={link.url}

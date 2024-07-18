@@ -1,9 +1,9 @@
 "use client";
-
-import { motion } from "framer-motion";
 import Image from "next/image";
+import InfoPart from "./InfoPart";
+import { MotionDiv } from "./motionComponents";
 
-const Content = [
+const Content: ContentInterface[] = [
   {
     title: "Devis",
     step: "Etape 01",
@@ -27,7 +27,7 @@ const Content = [
 const Apropos = () => {
   return (
     <>
-      <motion.div
+      <MotionDiv
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
@@ -38,28 +38,19 @@ const Apropos = () => {
         }}
         className="max-w-7xl mx-auto sm:mx-0 py-10 px-4 sm:py-24 sm:px-12 z-10 overflow-x-clip overflow-y-visible relative"
       >
-        <div className="flex flex-col w-full sm:w-[500px] gap-12 relative overflow-y-visible ">
-          {Content.map((c) => (
-            <div className="relative">
-              <div>
-                <h3 className="text-2xl font-semibold">{c.title}</h3>
-                <span>{c.step}</span>
-              </div>
-              <p className="p-2 font-medium text-[18px] tracking-tight ">
-                {c.content}
-              </p>
-              <div className="absolute h-[2px] bg-slate-800 bottom--14 w-full"></div>
-            </div>
+        <div className="flex flex-col w-full sm:w-[500px] gap-12 relative overflow-y-visible z-20">
+          {Content.map((c, index) => (
+            <InfoPart content={c} index={index} key={index} />
           ))}
-          <Image
-            src={"/image.png"}
-            alt=""
-            width={600}
-            height={200}
-            className="object-contain absolute right-[-120%]  max-sm:hidden bottom-[-200px] "
-          />
         </div>
-      </motion.div>
+        <Image
+          src={"/software-engineer-animate.svg"}
+          alt=""
+          width={800}
+          height={800}
+          className="object-contain absolute sm:left-[calc(100vw/2)]   bottom-[-200px] z-0 max-sm:left-[-100px] max-sm:bottom-[-200px] pointer-events-none"
+        />
+      </MotionDiv>
     </>
   );
 };

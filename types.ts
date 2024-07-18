@@ -22,3 +22,8 @@ interface Category {
   name: string;
   id: number;
 }
+interface ContentInterface {
+  title: string;
+  step: string;
+  content: string;
+}
