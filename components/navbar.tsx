@@ -31,8 +31,8 @@ const Navbar = () => {
   useEffect(() => {
     const handleScroll = () => {
       const scroll = window.scrollY;
-      if (scroll > 100) {
-        setBgColor("bg-white dark:bg-gray-900 shadow-md");
+      if (scroll > 50) {
+        setBgColor("shadow-md  bg-primarycolor-950");
       } else {
         setBgColor("bg-transparent");
       }
@@ -47,15 +47,15 @@ const Navbar = () => {
   }, []);
   return (
     <>
-      <header className={"sticky z-50 h-16 w-full top-0 " + roboto.className}>
+      <header className={"sticky z-50 h-12 w-full top-0 " + roboto.className}>
         <div
           className={
-            "min-w-full container flex h-16 items-center justify-between px-4 md:px-16  opacity-90 transition-colors duration-300 " +
+            "min-w-full container flex h-12 items-center justify-between px-4 md:px-16  opacity-90 transition-colors duration-300 " +
             bgColor
           }
         >
           <Link href="#" className="flex items-center gap-2" prefetch={false}>
-            <p className="text-2xl font-bold text-slate-600">PatriArch</p>
+            <p className="text-2xl font-bold text-accentcolor-400">PatriArch</p>
             <span className="sr-only">Acme Inc</span>
           </Link>
           <nav className="hidden md:flex items-center gap-12">
@@ -63,7 +63,7 @@ const Navbar = () => {
               <Link
                 key={key}
                 href={link.url}
-                className="text-lg font-semibold transition-colors text-[#011627] hover:text-[#797965] dark:hover:text-gray-50"
+                className="text-lg font-semibold transition-colors text-text-200 hover:text-text-50 dark:hover:text-gray-50"
                 prefetch={false}
               >
                 {link.name}

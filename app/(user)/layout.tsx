@@ -10,7 +10,7 @@ export default function RootLayout({
   return (
     <div
       className={
-        "grid w-full  justify-center grid-cols-1 bg-purple-200 bg-gradient-to-r from-slate-100 to-purple-200 h-fit " +
+        "grid w-full   grid-cols-1 bg-backgroundcolor-950  min-h-fit items-center justify-center overflow-x-hidden " +
         roboto.className
       }
     >

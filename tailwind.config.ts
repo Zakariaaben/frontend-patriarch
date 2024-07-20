@@ -1,13 +1,13 @@
-import type { Config } from "tailwindcss"
+import type { Config } from "tailwindcss";
 
 const config = {
   darkMode: ["class"],
   content: [
-    './pages/**/*.{ts,tsx}',
-    './components/**/*.{ts,tsx}',
-    './app/**/*.{ts,tsx}',
-    './src/**/*.{ts,tsx}',
-	],
+    "./pages/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
+    "./src/**/*.{ts,tsx}",
+  ],
   prefix: "",
   theme: {
     container: {
@@ -52,6 +52,71 @@ const config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        text: {
+          50: "#f0ebf9",
+          100: "#e0d8f3",
+          200: "#c2b0e8",
+          300: "#a389dc",
+          400: "#8562d0",
+          500: "#663bc4",
+          600: "#522f9d",
+          700: "#3d2376",
+          800: "#29174f",
+          900: "#140c27",
+          950: "#0a0614",
+        },
+        backgroundcolor: {
+          50: "#eeebfa",
+          100: "#dcd6f5",
+          200: "#baadeb",
+          300: "#9785e0",
+          400: "#745cd6",
+          500: "#5233cc",
+          600: "#4129a3",
+          700: "#311f7a",
+          800: "#211452",
+          900: "#100a29",
+          950: "#080514",
+        },
+        primarycolor: {
+          50: "#eeebf9",
+          100: "#ded8f3",
+          200: "#bcb0e8",
+          300: "#9b89dc",
+          400: "#7a62d0",
+          500: "#583bc4",
+          600: "#472f9d",
+          700: "#352376",
+          800: "#23174f",
+          900: "#120c27",
+          950: "#090614",
+        },
+        secondarycolor: {
+          50: "#f8f9eb",
+          100: "#f2f3d8",
+          200: "#e4e7b1",
+          300: "#d7db8a",
+          400: "#cacf63",
+          500: "#bcc33c",
+          600: "#979c30",
+          700: "#717524",
+          800: "#4b4e18",
+          900: "#26270c",
+          950: "#131406",
+        },
+        accentcolor: {
+          50: "#edf9eb",
+          100: "#daf3d8",
+          200: "#b5e7b1",
+          300: "#91db8a",
+          400: "#6ccf63",
+          500: "#47c33c",
+          600: "#399c30",
+          700: "#2b7524",
+          800: "#1c4e18",
+          900: "#0e270c",
+          950: "#071406",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -72,9 +137,13 @@ const config = {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
       },
+      backgroundImage: {
+        FormImageParticulier: "url('/formhouse.jpeg')",
+        FormImageProfessionnel: "url('/DES-11.jpg')",
+      },
     },
   },
   plugins: [require("tailwindcss-animate")],
-} satisfies Config
+} satisfies Config;
 
-export default config
+export default config;

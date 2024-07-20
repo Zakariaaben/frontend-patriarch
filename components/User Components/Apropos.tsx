@@ -1,5 +1,6 @@
 "use client";
 import Image from "next/image";
+import AppearOnScroll from "./AppearOnScroll";
 import InfoPart from "./InfoPart";
 import { MotionDiv } from "./motionComponents";
 
@@ -36,20 +37,22 @@ const Apropos = () => {
           visible: { opacity: 1 },
           hidden: { opacity: 0 },
         }}
-        className="max-w-7xl mx-auto sm:mx-0 py-10 px-4 sm:py-24 sm:px-12 z-10 overflow-x-clip overflow-y-visible relative"
+        className="max-w-7xl mx-auto sm:mx-0 py-10 px-4 sm:py-24 sm:px-12 z-10 overflow-visible relative "
       >
-        <div className="flex flex-col w-full sm:w-[500px] gap-12 relative overflow-y-visible z-20">
-          {Content.map((c, index) => (
-            <InfoPart content={c} index={index} key={index} />
-          ))}
-        </div>
-        <Image
-          src={"/software-engineer-animate.svg"}
-          alt=""
-          width={800}
-          height={800}
-          className="object-contain absolute sm:left-[calc(100vw/2)]   bottom-[-200px] z-0 max-sm:left-[-100px] max-sm:bottom-[-200px] pointer-events-none"
-        />
+        <AppearOnScroll>
+          <div className="flex flex-col w-full sm:w-[500px] gap-12 z-20">
+            {Content.map((c, index) => (
+              <InfoPart content={c} index={index} key={index} />
+            ))}
+            <Image
+              src={"/software-engineer-animate.svg"}
+              alt=""
+              width={800}
+              height={800}
+              className=" object-contain flex flex-row items-center sm:absolute sm:left-[calc(100vw/2)] top-0 max-sm:left-[-100px]  pointer-events-none"
+            />
+          </div>
+        </AppearOnScroll>
       </MotionDiv>
     </>
   );

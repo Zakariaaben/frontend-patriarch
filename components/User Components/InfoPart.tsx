@@ -31,13 +31,14 @@ const InfoPart = ({
       animate={inView ? "visible" : "hidden"}
     >
       <div>
-        <h3 className="text-2xl font-semibold">{content.title}</h3>
-        <span>{content.step}</span>
+        <h3 className="text-2xl font-semibold text-secondarycolor-200">
+          {content.title}
+        </h3>
+        <span className="text-secondarycolor-600">{content.step}</span>
       </div>
-      <p className="p-2 font-medium text-[18px] tracking-tight ">
+      <p className="p-2 font-medium text-[16px] tracking-tight text-text-50 text-justify">
         {content.content}
       </p>
-      <div className="absolute h-[2px] bg-slate-800 bottom--14 w-full"></div>
     </MotionDiv>
   );
 };
