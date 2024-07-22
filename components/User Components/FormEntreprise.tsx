@@ -5,15 +5,30 @@ import { SubmitButton } from "./formSubmitButton";
 
 const FormEntreprise = () => {
   const [name, setName] = useState("");
-  const [prenom, setPrenom] = useState("");
+  const [familyName, setFamilyName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [description, setDescription] = useState("");
-  const [type, setType] = useState("");
+  const [typeOfProject, setType] = useState("");
 
-  const handleContactFormSubmit = (e: any) => {
+  const handleContactFormSubmit = async (e: any) => {
     e.preventDefault();
-    console.log(name, prenom, phone, email, description, type);
+    const data = {
+      name,
+      familyName,
+      phone,
+      email,
+      description,
+      typeOfProject,
+      sender: "Professionnel",
+    };
+    const response = await fetch("/api/email/send", {
+      body: JSON.stringify(data),
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
   };
   return (
     <div className="bg-backgroundcolor-900 lg:col-span-2  flex-col max-lg:row-span-2 lg:rounded-bl-md rounded-tl-md max-lg:rounded-tr-md overflow-hidden order-2">
@@ -35,9 +50,9 @@ const FormEntreprise = () => {
               required
             />
             <ContactFormInput
-              placeholder=" "
-              onChange={(e) => setPrenom(e.target.value)}
-              labelName="Prenom"
+              placeholder="Nom de l'entreprise ou Institution"
+              onChange={(e) => setFamilyName(e.target.value)}
+              labelName="Institution"
               required
               type="text"
             />

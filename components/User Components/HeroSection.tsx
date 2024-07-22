@@ -3,6 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { Roboto_Mono } from "next/font/google";
 import Image from "next/image";
 import lines from "../../public/lines.png";
+import AnimatedText from "./AnimatedText";
 import { MotionDiv, MotionSpan } from "./motionComponents";
 const roboto = Roboto_Mono({ subsets: ["latin"] });
 
@@ -18,13 +19,13 @@ export default function Hero() {
       <div className={roboto.className + " relative"}>
         <div className="max-w-7xl mx-auto py-10 px-4 sm:py-24 sm:px-6 lg:px-8 z-10 relative">
           <div className="text-left sm:text-center">
-            <p
+            <AnimatedText
               className={
                 "mt-1 text-4xl font-extrabold text-secondarycolor-300 sm:text-5xl sm:tracking-wide lg:text-6xl spa"
               }
-            >
-              Innovation.
-            </p>
+              delay={0.5}
+              text="Innovation."
+            />
             <p className="max-w-2xl mt-5 mx-auto text-xl text-text-100 font-semibold grid grid-cols-1 gap-8  ">
               Le futur de l&apos;architecture et de la construction est là. Une
               toute nouvelle façon de concevoir et de construire des bâtiments.

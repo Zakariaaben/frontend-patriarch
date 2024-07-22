@@ -11,7 +11,7 @@ import { MotionDiv } from "./motionComponents";
 
 const dm = DM_Sans({ subsets: ["latin"] });
 export function ContactForm() {
-  const zIndex = motionValue(50);
+  const zIndex = motionValue(10);
   const zIndex2 = motionValue(0);
 
   const controls = useAnimation();
@@ -26,7 +26,7 @@ export function ContactForm() {
       opacity: 0,
       display: "none",
     });
-    animate(zIndex, 50, { duration: 0.5 });
+    animate(zIndex, 10, { duration: 0.5 });
     animate(zIndex2, 0, { duration: 0.5 });
   };
 
@@ -39,7 +39,7 @@ export function ContactForm() {
       opacity: 0,
       display: "none",
     });
-    animate(zIndex2, 50, { duration: 0.5 });
+    animate(zIndex2, 10, { duration: 0.5 });
     animate(zIndex, 0, { duration: 0.5 });
   };
 

@@ -47,7 +47,7 @@ const Navbar = () => {
   }, []);
   return (
     <>
-      <header className={"sticky z-50 h-12 w-full top-0 " + roboto.className}>
+      <header className={"sticky z-[50] h-12 w-full top-0 " + roboto.className}>
         <div
           className={
             "min-w-full container flex h-12 items-center justify-between px-4 md:px-16  opacity-90 transition-colors duration-300 " +

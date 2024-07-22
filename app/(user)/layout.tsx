@@ -1,5 +1,7 @@
 import Navbar from "@/components/navbar";
 import { Roboto_Mono } from "next/font/google";
+import { Suspense } from "react";
+import Loading from "./loading";
 const roboto = Roboto_Mono({ subsets: ["latin"] });
 
 export default function RootLayout({
@@ -15,7 +17,7 @@ export default function RootLayout({
       }
     >
       <Navbar />
-      {children}
+      <Suspense fallback={<Loading />}>{children}</Suspense>
     </div>
   );
 }
