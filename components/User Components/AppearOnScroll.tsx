@@ -25,7 +25,7 @@ const AppearOnScroll = ({
       ref={ref}
       variants={variants}
       initial="hidden"
-      transition={{ duration: 1 }}
+      transition={{ duration: 1, delay: delay || 0 }}
       animate={inView ? "visible" : "hidden"}
     >
       {children}

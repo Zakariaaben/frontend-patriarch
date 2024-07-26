@@ -1,8 +1,7 @@
 import Navbar from "@/components/navbar";
-import { Roboto_Mono } from "next/font/google";
+import { GeistSans } from "geist/font/sans";
 import { Suspense } from "react";
 import Loading from "./loading";
-const roboto = Roboto_Mono({ subsets: ["latin"] });
 
 export default function RootLayout({
   children,
@@ -10,14 +9,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div
-      className={
-        "grid w-full   grid-cols-1 bg-backgroundcolor-950  min-h-fit items-center justify-center overflow-x-hidden " +
-        roboto.className
-      }
-    >
+    <>
       <Navbar />
-      <Suspense fallback={<Loading />}>{children}</Suspense>
-    </div>
+      <div
+        className={
+          "grid w-full   grid-cols-1 min-h-fit items-center justify-center overflow-x-hidden text-heavy-metal " +
+          GeistSans.className
+        }
+      >
+        <Suspense fallback={<Loading />}>{children}</Suspense>
+      </div>
+    </>
   );
 }

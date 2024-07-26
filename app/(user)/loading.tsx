@@ -12,7 +12,7 @@ const Loading = () => {
           initial={{ opacity: 0 }}
           transition={{ duration: 1 }}
         >
-          <GridLoader color="rgb(122 98 208)" />
+          <GridLoader color="black" />
         </MotionDiv>
       </div>
     </div>

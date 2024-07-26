@@ -1,5 +1,6 @@
 "use client";
 import Image from "next/image";
+import Plan from "../../public/Plan.jpg";
 import AppearOnScroll from "./AppearOnScroll";
 import InfoPart from "./InfoPart";
 import { MotionDiv } from "./motionComponents";
@@ -37,21 +38,24 @@ const Apropos = () => {
           visible: { opacity: 1 },
           hidden: { opacity: 0 },
         }}
-        className="max-w-7xl mx-auto sm:mx-0 py-10 px-4 sm:py-24 sm:px-12 z-10 overflow-visible relative "
+        className="max-w-7xl flex flex-col sm:flex-row  mx-auto sm:mx-0 py-10 px-4 sm:py-24 sm:px-12 z-10 overflow-hidden relative "
       >
         <AppearOnScroll>
-          <div className="flex flex-col w-full sm:w-[500px] gap-12 z-20">
+          <div className="flex flex-col w-full max-w-[500px] gap-12 my-8 ">
             {Content.map((c, index) => (
               <InfoPart content={c} index={index} key={index} />
             ))}
-            <Image
-              src={"/software-engineer-animate.svg"}
-              alt=""
-              width={800}
-              height={800}
-              className=" object-contain flex flex-row items-center sm:absolute sm:left-[calc(100vw/2)] top-0 max-sm:left-[-100px]  pointer-events-none"
-            />
           </div>
+        </AppearOnScroll>
+
+        <AppearOnScroll delay={0.8}>
+          <Image
+            src={Plan}
+            alt=""
+            width={800}
+            height={800}
+            className="z-[-1] object-contain items-center  top-0 pointer-events-none"
+          />
         </AppearOnScroll>
       </MotionDiv>
     </>

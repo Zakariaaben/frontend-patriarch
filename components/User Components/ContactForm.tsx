@@ -1,7 +1,7 @@
 "use client";
 import { animate, motionValue, useAnimation } from "framer-motion";
 import { RotateCwSquareIcon } from "lucide-react";
-import { DM_Sans } from "next/font/google";
+
 import Image from "next/image";
 import imageProfetionnel from "../../public/DES-11.jpg";
 import imageParticulier from "../../public/formhouse.jpeg";
@@ -9,7 +9,6 @@ import FormEntreprise from "./FormEntreprise";
 import FormParticulier from "./FormParticulier";
 import { MotionDiv } from "./motionComponents";
 
-const dm = DM_Sans({ subsets: ["latin"] });
 export function ContactForm() {
   const zIndex = motionValue(10);
   const zIndex2 = motionValue(0);
@@ -46,8 +45,7 @@ export function ContactForm() {
   return (
     <MotionDiv
       className={
-        "grid grid-cols-1   min-h-screen p-12 max-sm:p-2 relative rounded-lg " +
-        dm.className
+        "grid grid-cols-1   min-h-screen p-12 max-sm:p-2 relative rounded-lg "
       }
       animate={{
         opacity: [0, 1],

@@ -30,8 +30,8 @@ const Page = async () => {
       <CardContent>
         <div className="gap-4 flex flex-col">
           <AddCategory />
-          <ScrollArea className="h-[calc(100vh-12rem)] w-full border-t-2 border-slate-400">
-            <div>
+          <ScrollArea className="h-[calc(100vh-16.7rem)] w-full border-t-2 border-slate-400 bg-slate-50">
+            <div className="overflow-y-scroll h-full">
               {Categories.map((category, key) => {
                 return <ViewCategory key={key} category={category} />;
               })}
