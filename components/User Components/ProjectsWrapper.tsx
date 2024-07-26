@@ -16,7 +16,7 @@ export const ProjectsWrapper = async ({
 
   return (
     <>
-      <div className="w-full  p-4 mb-24 grid gap-x-12 gap-y-8  grid-cols-1 lg:grid-cols-2  justify-items-center justify-center ">
+      <div className="w-full  p-4  justify-center items-center grid gap-x-8 gap-y-8 grid-cols-1 xl:grid-cols-3 md:grid-cols-2  ">
         <Projects projects={projectsData} />
       </div>
     </>

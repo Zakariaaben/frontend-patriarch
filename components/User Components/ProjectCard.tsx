@@ -39,7 +39,7 @@ export const ProjectCard = ({
     <MotionDiv
       ref={ref}
       className={
-        "w-[500px]  rounded-sm border-gray-700  cursor-pointer shadow-[2px_2px_29px_11px_#e0e0e2,0px_3px_8px_0px_#00000024] " +
+        " rounded-sm border-gray-700  cursor-pointer shadow-[2px_2px_29px_11px_#e0e0e2,0px_3px_8px_0px_#00000024] " +
         os.className
       }
       onClick={() => handleShownId(Project)}
