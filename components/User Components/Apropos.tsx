@@ -41,7 +41,7 @@ const Apropos = () => {
         className="max-w-7xl flex flex-col sm:flex-row  mx-auto sm:mx-0 py-10 px-4 sm:py-24 sm:px-12 z-10 overflow-hidden relative "
       >
         <AppearOnScroll>
-          <div className="flex flex-col w-full max-w-[500px] gap-12 my-8 ">
+          <div className="flex flex-col w-full max-w-[500px] min-w-[max(100%,400px)]  gap-12 my-8 ">
             {Content.map((c, index) => (
               <InfoPart content={c} index={index} key={index} />
             ))}
@@ -54,7 +54,7 @@ const Apropos = () => {
             alt=""
             width={800}
             height={800}
-            className="z-[-1] object-contain items-center  top-0 pointer-events-none"
+            className="z-[-1] object-contain  items-center top-0 pointer-events-none"
           />
         </AppearOnScroll>
       </MotionDiv>

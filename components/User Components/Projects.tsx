@@ -1,10 +1,9 @@
 "use client";
 
-import { ScrollArea } from "@radix-ui/react-scroll-area";
 import { AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
 import { useRef, useState } from "react";
-import { ScrollBar } from "../ui/scroll-area";
+import { ScrollArea } from "../ui/scroll-area";
 import { Carousel } from "./carousel";
 import { MotionDiv } from "./motionComponents";
 import { ProjectCard } from "./ProjectCard";
@@ -36,18 +35,18 @@ const Projects = ({ projects }: { projects: Project[] }) => {
             exit={{ opacity: 0 }}
           >
             <ScrollArea
-              className="min-h-fit overflow-y-auto w-fit"
+              className="min-h-fit overflow-y-auto w-fit rounded-lg"
               ref={shownref}
             >
               <div className="rounded-lg overflow-y-auto max-w-[800px] w-[calc(100vw-2rem)] bg-white ">
                 <X
-                  className="absolute top-4 left-4 cursor-pointer "
-                  size={24}
+                  className="absolute top-4 left-4 cursor-pointer z-50 backdrop-blur-sm bg-opacity-30 bg-white rounded-full p-1 font-bold"
+                  size={32}
                   onClick={() => {
                     setProjectShown(null);
                   }}
                 />
-                <div className="max-w-full">
+                <div className="max-w-full p-4">
                   <Carousel
                     IMAGES={projectShown.images.map((image, index) => {
                       return { id: index, imageSrc: "/api/uploads/" + image };
@@ -65,8 +64,6 @@ const Projects = ({ projects }: { projects: Project[] }) => {
                   />
                 </div>
               </div>
-
-              <ScrollBar orientation="vertical" className=" " />
             </ScrollArea>
           </MotionDiv>
         )}

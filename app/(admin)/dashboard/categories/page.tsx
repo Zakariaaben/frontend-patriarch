@@ -6,7 +6,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { ScrollArea } from "@radix-ui/react-scroll-area";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 const Page = async () => {
   const response = await fetch(process.env.API_URL + "/categories", {
@@ -31,7 +31,7 @@ const Page = async () => {
         <div className="gap-4 flex flex-col">
           <AddCategory />
           <ScrollArea className="h-[calc(100vh-16.7rem)] w-full border-t-2 border-slate-400 bg-slate-50">
-            <div className="overflow-y-scroll h-full">
+            <div className="overflow-y-auto h-full">
               {Categories.map((category, key) => {
                 return <ViewCategory key={key} category={category} />;
               })}

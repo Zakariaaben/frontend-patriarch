@@ -1,12 +1,5 @@
 "use client";
-import {
-  LineChart,
-  ListTodo,
-  Package,
-  Package2,
-  SquareStackIcon,
-  Users2,
-} from "lucide-react";
+import { ListTodo, Package2, SquareStackIcon } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
@@ -20,9 +13,6 @@ import {
 const Links = [
   { link: "Projets", icon: <ListTodo /> },
   { link: "Categories", icon: <SquareStackIcon /> },
-  { link: "Products", icon: <Package /> },
-  { link: "Customers", icon: <Users2 /> },
-  { link: "Analytics", icon: <LineChart /> },
 ];
 
 const SideNav = () => {

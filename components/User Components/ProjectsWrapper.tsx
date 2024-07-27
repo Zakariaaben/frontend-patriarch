@@ -1,4 +1,5 @@
 import Projects from "./Projects";
+import { Animatepresence, MotionDiv } from "./motionComponents";
 
 export const ProjectsWrapper = async ({
   categoryId,
@@ -16,9 +17,15 @@ export const ProjectsWrapper = async ({
 
   return (
     <>
-      <div className="w-full  p-4  justify-center items-center grid gap-x-8 gap-y-8 grid-cols-1 xl:grid-cols-3 md:grid-cols-2  ">
-        <Projects projects={projectsData} />
-      </div>
+      <Animatepresence>
+        <MotionDiv
+          exit={{ opacity: 0, transition: { duration: 1 } }}
+          animate={{ opacity: 1, transition: { duration: 1 } }}
+          className="w-full  p-4  justify-center items-center grid gap-x-8 gap-y-8 grid-cols-1 xl:grid-cols-3 md:grid-cols-2  "
+        >
+          <Projects projects={projectsData} />
+        </MotionDiv>
+      </Animatepresence>
     </>
   );
 };
