@@ -11,7 +11,7 @@ export default async function NosProjets({
   searchParams?: { [key: string]: string | undefined };
 }) {
   const { categoryId } = searchParams || {};
-  const response = await fetch(process.env.API_url + "/categories");
+  const response = await fetch(process.env.API_URL + "/categories");
   const categories: Category[] = await response.json();
   revalidatePath("/nosprojets");
   return (

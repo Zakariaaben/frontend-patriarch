@@ -3,7 +3,11 @@ import { useState } from "react";
 import ContactFormInput from "./ContactFormInput";
 import { SubmitButton } from "./formSubmitButton";
 
-const FormParticulier = () => {
+const FormParticulier = ({
+  showProfessionnel,
+}: {
+  showProfessionnel?: () => void;
+}) => {
   const [name, setName] = useState("");
   const [familyName, setFamilyName] = useState("");
   const [phone, setPhone] = useState("");
@@ -37,8 +41,8 @@ const FormParticulier = () => {
         className="grid grid-cols-1  p-6 gap-8"
         onSubmit={handleContactFormSubmit}
       >
-        <span className="text-secondarycolor-200 [text-shadow:1px_1px_8px_var(--tw-shadow-color)] shadow-secondarycolor-800  w-fit justify-self-center font-bold text-3xl -tracking-tighter p-2">
-          Vous êtes un Particulier
+        <span className="text-secondarycolor-200 [text-shadow:1px_1px_8px_var(--tw-shadow-color)] shadow-secondarycolor-800  w-fit justify-self-center font-bold text-2xl -tracking-tighter p-2">
+          Vous êtes un Particulier ou un Professionnel
         </span>
         <div className="grid grid-cols-1 gap-8">
           <div className="grid grid-cols-2 gap-8">
@@ -93,7 +97,15 @@ const FormParticulier = () => {
               Description
             </label>
           </div>
-          <SubmitButton onClick={handleContactFormSubmit} />
+          <div className="flex justify-between items-center">
+            <span
+              className="z-100 bottom-4 left-4 text-secondarycolor-200 text-justify  font-medium cursor-pointer text-sm shadow-black"
+              onClick={showProfessionnel}
+            >
+              Vous êtes un organisme ou une Institution ?
+            </span>
+            <SubmitButton onClick={handleContactFormSubmit} />
+          </div>
         </div>
       </form>
     </div>

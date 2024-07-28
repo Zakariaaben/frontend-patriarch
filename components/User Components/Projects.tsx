@@ -24,7 +24,6 @@ const Projects = ({ projects }: { projects: Project[] }) => {
           currentProject={projectShown}
         />
       ))}
-      <style>{``}</style>
 
       <AnimatePresence>
         {projectShown && (

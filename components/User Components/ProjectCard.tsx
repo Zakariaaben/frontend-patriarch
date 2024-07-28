@@ -57,10 +57,14 @@ export const ProjectCard = ({
       <div className="w-full">
         <Image
           alt=""
+          quality={100}
+          loader={({ src }) => src + `?q=1`}
           src={"/api/uploads/" + Project.images[0]}
           width={1920}
           height={1080}
-          className="aspect-video w-full rounded-t-sm object-cover"
+          className="aspect-video w-full rounded-t-sm object-cover opacity-0 transition-opacity duration-500 ease-in-out"
+          onLoadingComplete={(image) => image.classList.remove("opacity-0")} // Remove the opacity-0 class after the image has loaded
+          priority
         />
       </div>
       <div className=" w-full px-6 py-4 ">

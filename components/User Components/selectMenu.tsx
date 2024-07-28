@@ -63,7 +63,7 @@ export function SelectCategoryMenu({
       ref={menu}
     >
       <MotionButton
-        className="text-slate-300 text-left text-nowrap flex w-56 justify-between "
+        className="text-heavy-metal-600 font-medium text-left text-nowrap flex w-56 justify-between "
         onClick={handleOpenMenu}
         animate={{ opacity: [0, 1] }}
         initial={initialMount ? false : { opacity: 0 }}

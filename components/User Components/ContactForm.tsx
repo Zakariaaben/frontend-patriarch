@@ -1,6 +1,5 @@
 "use client";
 import { animate, motionValue, useAnimation } from "framer-motion";
-import { RotateCwSquareIcon } from "lucide-react";
 
 import Image from "next/image";
 import imageProfetionnel from "../../public/DES-11.jpg";
@@ -45,7 +44,7 @@ export function ContactForm() {
   return (
     <MotionDiv
       className={
-        "grid grid-cols-1   min-h-screen p-12 max-sm:p-2 relative rounded-lg "
+        "grid grid-cols-1   min-h-screen p-12 max-sm:p-0 relative rounded-lg "
       }
       animate={{
         opacity: [0, 1],
@@ -67,12 +66,7 @@ export function ContactForm() {
           placeholder="blur"
           className="object-cover h-full  rounded-md lg:order-1 transition-opacity"
         />
-        <FormParticulier />
-        <RotateCwSquareIcon
-          size={32}
-          className="z-100 top-4 right-4 text-slate-600 absolute cursor-pointer  drop-shadow-xl shadow-black"
-          onClick={showProfessionnel}
-        />
+        <FormParticulier showProfessionnel={showProfessionnel} />
       </MotionDiv>
       <MotionDiv
         style={{ zIndex: zIndex2 }}
@@ -81,7 +75,7 @@ export function ContactForm() {
         initial={{ opacity: 0 }}
         className="max-w-[min(100%,1100px)] w-full h-fit  min-w-96  grid lg:grid-cols-3 max-lg:grid-rows-3 relative row-start-1 col-start-1 m-auto "
       >
-        <FormEntreprise />
+        <FormEntreprise showParticulier={showParticulier} />
         <Image
           width={1250}
           height={833}
@@ -89,11 +83,6 @@ export function ContactForm() {
           src={imageProfetionnel}
           placeholder="blur"
           className="object-cover h-full lg:rounded-tr-md rounded-br-md max-lg:rounded-bl-md order-1 "
-        />
-        <RotateCwSquareIcon
-          size={32}
-          className="z-100 top-4 right-4 text-slate-600 lg:text-slate-300  absolute cursor-pointer  drop-shadow-sm shadow-black"
-          onClick={showParticulier}
         />
       </MotionDiv>
     </MotionDiv>
