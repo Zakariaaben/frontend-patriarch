@@ -29,7 +29,7 @@ export function SelectCategoryMenu({
       setInitialMount(false);
       return;
     }
-  }, [pathname]);
+  }, [pathname, initialMount]);
 
   const handleOpenMenu = async () => {
     setOpen(!open);

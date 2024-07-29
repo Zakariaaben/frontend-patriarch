@@ -33,19 +33,22 @@ import { MoonLoader } from "react-spinners";
 import { useToast } from "../ui/use-toast";
 
 const initialContent = `
-        <div class="px-4 sm:px-8 py-2">
-    
-        <h2 style="font-size: 28px ;line-height: 1.75rem; font-weight:600;">
-        Sous-titre de la section
+        <h2 class="text-slate-300 text-lg mb-2">
+              "Un projet de restauration respectueux du patrimoine et
+              tourné vers l'avenir"
         </h2>
-    
-        <p style="font-size:1.25rem ;font-weight:500; margin-top:5px; text-align:justify;" >
-        &emsp;Lorem Ipsum <i>CE TEXTE EST EN ITALIQUE</i> of the printing and typesetting industry. Lorem Ipsum has been the industry's <span style="color:red">CE TEXTE EST EN COULEUR</span>  since the 1500s, when an unknown printer took a galley of type and <strong>CE TEXTE EST EN GRAS</strong> it to make a type.
-        <br>
-        &emsp;Ceci est un saut de ligne
+        <p class="text-justify text-base text-white">
+              La mosquée Chorfa, une des plus anciennes mosquées de la
+              ville de Tlemcen, a été restaurée par l'agence
+              d'architecture et d'urbanisme "PatriArchPlus" en 2021. Le
+              projet a été réalisé dans le cadre de la valorisation du
+              patrimoine architectural de la ville de Tlemcen. La
+              mosquée Chorfa est un monument historique classé, elle est
+              située dans la vieille ville de Tlemcen, à proximité de la
+              place El Mechouar. La restauration de la mosquée Chorfa a
+              permis de redonner à ce monument son éclat d'antan et de
+              le préserver pour les générations futures.
         </p>
-    
-        </div>
         `;
 
 export const NewProject = () => {

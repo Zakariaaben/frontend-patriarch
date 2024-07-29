@@ -1,7 +1,9 @@
 "use client";
 import { AnimatePresence, motion, PanInfo, wrap } from "framer-motion";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
 import { useRef, useState } from "react";
+import { ScrollArea } from "../ui/scroll-area";
 
 const sliderVariants = {
   incoming: (direction: number) => ({
@@ -63,7 +65,7 @@ export const Carousel = ({
 
   return (
     <>
-      <div className="relative flex flex-col items-center">
+      <div className="relative flex flex-col items-center w-full">
         <div className="relative flex flex-col items-center my-6 w-full  ">
           <div
             className="relative overflow-hidden w-[calc(100%-1.5rem)] aspect-video  "
@@ -92,7 +94,10 @@ export const Carousel = ({
                   onClick={() =>
                     setZoomedImage(IMAGES[activeImageIndex].imageSrc)
                   }
-                  className=" object-cover  aspect-video h-full w-full"
+                  className="w-full max-h-[calc(100dvh-3rem)]   object-cover  opacity-0 transition-opacity duration-500 ease-in-out"
+                  onLoad={(image) =>
+                    image.currentTarget.classList.remove("opacity-0")
+                  } // Remove the opacity-0 class after the image has loaded
                 />
               </motion.div>
             </AnimatePresence>
@@ -101,41 +106,46 @@ export const Carousel = ({
           <div className="flex mt-3">
             <button
               onClick={() => swipeToImage(-1)}
-              className="mx-2 px-3 py-2 bg-[#1f1f1f] text-white transform skew-y-[-5deg] rotate-[5deg] transition-transform duration-75 ease-out hover:cursor-pointer active:scale-90"
+              className="mx-2 px-3 py-2 bg-[#1f1f1f] bg-clip-text  transform skew-y-[-5deg] rotate-[5deg] transition-transform duration-75 ease-out hover:cursor-pointer active:scale-90"
             >
-              PREV
+              <ChevronLeft size={32} color="black" />
             </button>
             <button
               onClick={() => swipeToImage(1)}
-              className="mx-2 px-3 py-2 bg-[#1f1f1f] text-white transform skew-y-[-5deg] rotate-[5deg] transition-transform duration-75 ease-out hover:cursor-pointer active:scale-90"
+              className="mx-2 px-3 py-2 bg-[#1f1f1f] bg-clip-text  transform skew-y-[-5deg] rotate-[5deg] transition-transform duration-75 ease-out hover:cursor-pointer active:scale-90"
             >
-              NEXT
+              <ChevronRight size={32} color="black" />
             </button>
           </div>
         </div>
 
-        <div className="relative flex overflow-x-auto">
-          {IMAGES.map((image) => (
-            <div
-              key={image.id}
-              onClick={() => skipToImage(image.id)}
-              className="relative aspect-video w-[90px] sm:w-[120px] cursor-pointer mr-1"
-            >
-              <Image
-                src={image.imageSrc}
-                alt="Thumbnail"
-                width={1920}
-                height={1080}
-                className="w-full h-full object-cover"
-              />
+        <ScrollArea className=" flex justify-center w-full overflow-x-auto">
+          <div className="relative max-w-[calc(100vw-3rem)] w-[800px]  overflow-x-auto flex justify-evenly gap-1">
+            {IMAGES.map((image) => (
               <div
-                className={`absolute inset-0 bg-[#1f1f1f] bg-opacity-70  transform origin-left transition-transform duration-1000 ease-in-out ${
-                  image.id === activeImageIndex ? "scale-x-100" : "scale-x-0"
-                }`}
-              />
-            </div>
-          ))}
-        </div>
+                key={image.id}
+                onClick={() => skipToImage(image.id)}
+                className="relative aspect-video max-sm:min-h-[90px] max-sm:max-h-[90px] sm:h-[120px] cursor-pointer"
+              >
+                <Image
+                  src={image.imageSrc}
+                  alt="Thumbnail"
+                  width={1920}
+                  height={1080}
+                  className="w-full h-full object-cover opacity-0 transition-opacity duration-500 ease-in-out"
+                  onLoad={(image) =>
+                    image.currentTarget.classList.remove("opacity-0")
+                  } // Remove the opacity-0 class after the image has loaded
+                />
+                <div
+                  className={`absolute inset-0 bg-[#1f1f1f] bg-opacity-70  transform origin-left transition-transform duration-1000 ease-in-out ${
+                    image.id === activeImageIndex ? "scale-x-100" : "scale-x-0"
+                  }`}
+                />
+              </div>
+            ))}
+          </div>
+        </ScrollArea>
       </div>
       <AnimatePresence>
         {zoomedImage && (
@@ -145,7 +155,7 @@ export const Carousel = ({
               animate={{ opacity: 1 }}
               initial={{ opacity: 0 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 opacity-0 bg-black bg-opacity-80 w-screen h-screen flex justify-center items-center "
+              className="fixed inset-0 opacity-0 bg-black bg-opacity-80 w-screen h-[100dvh] flex justify-center items-center z-[100] "
               onClick={() => setZoomedImage(null)}
             >
               <Image
@@ -153,7 +163,7 @@ export const Carousel = ({
                 src={zoomedImage}
                 width={1920}
                 height={1080}
-                className="aspect-video  max-h-[calc(100%-2rem)] hover:cursor-zoom-out object-contain"
+                className="aspect-video  h-full hover:cursor-zoom-out object-contain"
               />
             </motion.div>
           </>

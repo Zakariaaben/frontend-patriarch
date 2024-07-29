@@ -1,9 +1,8 @@
 "use client";
 import Image from "next/image";
-import Plan from "../../public/Plan.jpg";
-import AppearOnScroll from "./AppearOnScroll";
 import InfoPart from "./InfoPart";
 import { MotionDiv } from "./motionComponents";
+import YoucefPhoto from "/public/YoucefPhoto.jpg";
 
 const Content: ContentInterface[] = [
   {
@@ -38,25 +37,38 @@ const Apropos = () => {
           visible: { opacity: 1 },
           hidden: { opacity: 0 },
         }}
-        className="max-w-7xl flex flex-col sm:flex-row  mx-auto sm:mx-0 py-10 px-4 sm:py-24 sm:px-12 z-10 overflow-hidden relative "
+        className=" flex flex-col md:flex-row  mx-auto sm:mx-0  px-4 sm:my-24 sm:px-12 z-10 overflow-hidden relative "
       >
-        <AppearOnScroll>
-          <div className="flex flex-col w-full max-w-[500px] min-w-[max(100%,400px)]  gap-12 my-8 ">
-            {Content.map((c, index) => (
-              <InfoPart content={c} index={index} key={index} />
-            ))}
-          </div>
-        </AppearOnScroll>
+        <div className="flex flex-col   w-[min(100%,900px)]  gap-12 p-2 bg-slate-100">
+          {Content.map((c, index) => (
+            <InfoPart content={c} index={index} key={index} />
+          ))}
+        </div>
 
-        <AppearOnScroll delay={0.8}>
-          <Image
-            src={Plan}
-            alt=""
-            width={800}
-            height={800}
-            className="z-[-1] object-contain  items-center top-0 pointer-events-none"
-          />
-        </AppearOnScroll>
+        <div className=" min-h-full flex p-8 bg-heavy-metal-800 border-heavy-metal-800 border-2 text-slate-300 flex-col">
+          <h2 className="text-3xl font-extrabold text-white">
+            Benhamiche Youcef
+          </h2>
+          <p>Architecte Agréé </p>
+          <p>
+            <span className="text-white">Spécialité: </span> Réstauration et
+            Réhabilitation
+          </p>
+          <div className="flex flex-col lg:flex-row gap-2   p-2">
+            <Image
+              src={YoucefPhoto}
+              alt="Youcef Benhamiche "
+              height={200}
+              className="object-cover    self-center"
+            />
+            <p className="text-justify text-white flex items-center">
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Hic
+              blanditiis possimus molestiae numquam totam, soluta sapiente atque
+              perspiciatis magnam? Voluptatibus necessitatibus soluta molestias
+              atque nihil laudantium officia explicabo minus eligendi.
+            </p>
+          </div>
+        </div>
       </MotionDiv>
     </>
   );

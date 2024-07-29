@@ -1,8 +1,9 @@
-import { Open_Sans } from "next/font/google";
+import { Lexend, Open_Sans } from "next/font/google";
 import Image from "next/image";
 import { useEffect, useRef } from "react";
 import { MotionDiv } from "./motionComponents";
 const os = Open_Sans({ subsets: ["latin"] });
+const lex = Lexend({ weight: "400", subsets: ["latin"] });
 export const ProjectCard = ({
   Project,
   index,
@@ -40,7 +41,7 @@ export const ProjectCard = ({
       ref={ref}
       className={
         " rounded-sm border-gray-700  cursor-pointer shadow-[2px_2px_29px_11px_#e0e0e2,0px_3px_8px_0px_#00000024] " +
-        os.className
+        lex.className
       }
       onClick={() => handleShownId(Project)}
       animate={{ opacity: [0, 1], scale: currentProject === Project ? 1.2 : 1 }}
@@ -63,7 +64,7 @@ export const ProjectCard = ({
           width={1920}
           height={1080}
           className="aspect-video w-full rounded-t-sm object-cover opacity-0 transition-opacity duration-500 ease-in-out"
-          onLoadingComplete={(image) => image.classList.remove("opacity-0")} // Remove the opacity-0 class after the image has loaded
+          onLoad={(image) => image.currentTarget.classList.remove("opacity-0")} // Remove the opacity-0 class after the image has loaded
           priority
         />
       </div>
