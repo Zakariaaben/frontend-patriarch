@@ -22,7 +22,7 @@ const Page = async () => {
           <div>
             <CardTitle className="text-lg">Catégories</CardTitle>
             <CardDescription>
-              Ajoutez modifiez et supprimez des catégories.
+              Ajoutez modifiez et supprimez des catégories .
             </CardDescription>
           </div>
         </div>
