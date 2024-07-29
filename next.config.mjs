@@ -18,7 +18,7 @@ const nextConfig = {
     return [
       {
         source: "/api/:path*",
-        destination: `${process.env.API_URL}/:path*`,
+        destination: `https://api.patriarchplus.com/:path*`,
       },
     ];
   },
