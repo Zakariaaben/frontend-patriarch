@@ -39,13 +39,13 @@ const Apropos = () => {
         }}
         className=" flex flex-col md:flex-row  mx-auto sm:mx-0  px-4 sm:my-24 sm:px-12 z-10 overflow-hidden relative "
       >
-        <div className="flex flex-col   w-[min(100%,900px)]  gap-12 p-2 bg-slate-100">
+        <div className="flex flex-col   w-[min(1200px,100%)] gap-12 p-2 ">
           {Content.map((c, index) => (
             <InfoPart content={c} index={index} key={index} />
           ))}
         </div>
 
-        <div className=" min-h-full flex p-8 bg-heavy-metal-800 border-heavy-metal-800 border-2 text-slate-300 flex-col">
+        <div className=" min-h-full flex p-8 bg-customcolors-secondary-200   border-heavy-metal-800 border-2 text-slate-300 flex-col">
           <h2 className="text-3xl font-extrabold text-white">
             Benhamiche Youcef
           </h2>
@@ -61,7 +61,7 @@ const Apropos = () => {
               height={200}
               className="object-cover    self-center"
             />
-            <p className="text-justify text-white flex items-center">
+            <p className="text-justify text-white ">
               Lorem ipsum dolor sit, amet consectetur adipisicing elit. Hic
               blanditiis possimus molestiae numquam totam, soluta sapiente atque
               perspiciatis magnam? Voluptatibus necessitatibus soluta molestias

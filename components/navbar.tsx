@@ -48,10 +48,10 @@ const Navbar = () => {
   return (
     <>
       <div
-        className={`${GeistSans.className}  sticky z-[50] w-full  bg-white top-0 min-w-full container flex h-12 items-center justify-between px-4 md:px-16 transition duration-300  ${bgColor}`}
+        className={`${GeistSans.className}  sticky z-[50] w-full  bg-customcolors-background top-0 min-w-full container flex h-12 items-center justify-between px-4 md:px-16 transition duration-300  ${bgColor}`}
       >
         <Link href="#" className="flex items-center gap-2" prefetch={false}>
-          <p className="text-2xl font-bold text-[#abcdb0]">PatriArch</p>
+          <h1 className="text-3xl font-bold text-[#2E2D4D]">PatriArch</h1>
           <span className="sr-only">Acme Inc</span>
         </Link>
         <nav className="hidden md:flex items-center gap-12">

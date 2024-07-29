@@ -20,7 +20,7 @@ export default function RootLayout({
       <head>
         <link rel="Canoniques" href="https://patriarchplus.com" />
       </head>
-      <body className={inter.className + "  min-h-screen"}>{children}</body>
+      <body className={inter.className + "  min-h-[100dvh]"}>{children}</body>
     </html>
   );
 }

@@ -32,7 +32,7 @@ const InfoPart = ({
     >
       <div>
         <h3 className="text-2xl font-semibold ">{content.title}</h3>
-        <span className="text-secondarycolor-600">{content.step}</span>
+        <span className="text-customcolors-accent-500">{content.step}</span>
       </div>
       <p className="p-2 font-medium text-[16px] tracking-tight  text-justify">
         {content.content}

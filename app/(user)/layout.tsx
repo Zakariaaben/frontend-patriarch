@@ -13,7 +13,7 @@ export default function RootLayout({
       <Navbar />
       <div
         className={
-          "grid w-full   grid-cols-1 min-h-fit items-center justify-center overflow-x-hidden text-heavy-metal " +
+          "grid w-full   grid-cols-1 min-h-fit bg-customcolors-background items-center justify-center overflow-x-hidden text-heavy-metal " +
           GeistSans.className
         }
       >

@@ -28,7 +28,7 @@ export default async function NosProjets({
   }
   revalidatePath("/nosprojets");
   return (
-    <div className={"text-slate-800 min-h-screen  "}>
+    <div className={"text-slate-800 min-h-[100dvh]  "}>
       <div className="flex items-center w-full  p-4 gap-4">
         <span className="font-semibold text-xl ">Filtrer:</span>
         <SelectCategoryMenu

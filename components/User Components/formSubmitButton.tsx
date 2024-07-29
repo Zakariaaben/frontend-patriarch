@@ -3,13 +3,13 @@ import { HtmlHTMLAttributes } from "react";
 export const SubmitButton = (props: HtmlHTMLAttributes<HTMLButtonElement>) => {
   return (
     <button
-      className="relative p-px font-semibold leading-6 text-white no-underline bg-primarycolor-800 hover:bg-opacity-85 shadow-2xl cursor-pointer group rounded-xl shadow-zinc-900 w-fit justify-self-end  mx-2 transition"
+      className="relative p-px font-semibold leading-6 text-white no-underline bg-primarycolor-800 hover:bg-opacity-85 cursor-pointer group rounded-xl shadow-zinc-900 w-fit justify-self-end  mx-2 transition"
       type="submit"
     >
       <span className="absolute inset-0 overflow-hidden rounded-xl">
         <span className="absolute inset-0 rounded-xl bg-[image:radial-gradient(75%_100%_at_50%_0%,rgba(56,189,248,0.6)_0%,rgba(56,189,248,0)_75%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100"></span>
       </span>
-      <div className="relative z-10 flex items-center px-6 py-3 space-x-2 rounded-xl bg-gray-950/50 ring-1 ring-white/10   transition group:">
+      <div className="relative z-10 flex items-center px-6 py-3 space-x-2 rounded-xl bg-customcolors-accent-300 ring-1 ring-white/10   transition group:">
         <span>Envoyer</span>
         <svg
           xmlns="http://www.w3.org/2000/svg"

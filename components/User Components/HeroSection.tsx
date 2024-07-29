@@ -16,20 +16,20 @@ export default function Hero() {
       transition={{ duration: 1, once: true }}
       className=""
     >
-      <div className={" relative"}>
-        <div className="max-w-7xl mx-auto py-10 px-4 sm:py-24 sm:px-6 lg:px-8 z-10 relative">
+      <div className={" relative mb-12"}>
+        <div className="max-w-7xl mx-auto py-10 px-4 sm:py-24 sm:px-6 lg:px-8 z-10 relative ">
           <div className="text-left sm:text-center">
-            <h1 className={"mt-1  flex flex-col justify-start"}>
+            <h1 className={"mt-1  flex flex-col justify-start text-[#0D0D0D]"}>
               <div className="w-fit sm:w-auto">
                 <AnimatedText
-                  className="text-3xl font-extrabold  text-[#171c1a] sm:text-4xl sm:tracking-wide lg:text-6xl"
+                  className="text-3xl font-extrabold   sm:text-4xl sm:tracking-wide lg:text-6xl"
                   text="Elevez Le Design"
                 />
               </div>
 
               <div className="w-fit sm:w-auto">
                 <AnimatedText
-                  className="text-3xl font-extrabold text-[#171c1a] sm:text-4xl sm:tracking-wide lg:text-6xl"
+                  className="text-3xl font-extrabold sm:text-4xl sm:tracking-wide lg:text-6xl"
                   text="À Un Tout Autre Niveau."
                 />
               </div>
@@ -38,9 +38,11 @@ export default function Hero() {
             <h2 className="max-w-2xl mt-5 mx-auto text-xl text-[#171c1a] font-semibold grid grid-cols-1 gap-8 max-sm:text-justify ">
               Le futur de l&apos;architecture et de la construction est là. Une
               toute nouvelle façon de concevoir et de construire des bâtiments.
-              <Link href="/contact">
+            </h2>
+            <Link href="/contact">
+              <button className="w-fit py-3 mt-8 px-4 rounded-xl bg-customcolors-primary-300 ">
                 <MotionSpan
-                  className="text-2xl font-semibold cursor-pointer text-[#212025] hover:text-opacity-90 flex items-center justify-left sm:justify-center gap-2 hover:gap-4 transition-[color,gap]"
+                  className="text-md font-semibold cursor-pointer text-background  hover:text-opacity-90 flex items-center justify-left sm:justify-center gap-2 hover:gap-4 transition-[color,gap]"
                   whileInView={{
                     translateX: [0, 10, -10, 10, -10, 0],
                   }}
@@ -52,13 +54,11 @@ export default function Hero() {
                     bounce: 0.5,
                   }}
                 >
-                  <button>
-                    Rejoingnez nous !
-                    <ArrowRight className="h-8 w-8 inline-block" />
-                  </button>
+                  Demander votre devis gratuit
+                  <ArrowRight className="h-8 w-8 inline-block" />
                 </MotionSpan>
-              </Link>
-            </h2>
+              </button>
+            </Link>
           </div>
         </div>
       </div>

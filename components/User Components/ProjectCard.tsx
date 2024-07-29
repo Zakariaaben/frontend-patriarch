@@ -40,8 +40,7 @@ export const ProjectCard = ({
     <MotionDiv
       ref={ref}
       className={
-        " rounded-sm border-gray-700  cursor-pointer shadow-[2px_2px_29px_11px_#e0e0e2,0px_3px_8px_0px_#00000024] " +
-        lex.className
+        " rounded-sm border-gray-700  bg-customcolors-secondary-950 cursor-pointer  "
       }
       onClick={() => handleShownId(Project)}
       animate={{ opacity: [0, 1], scale: currentProject === Project ? 1.2 : 1 }}
@@ -55,7 +54,7 @@ export const ProjectCard = ({
       initial={{ opacity: 0 }}
       whileHover={{ scale: 1.01 }}
     >
-      <div className="w-full">
+      <div className="w-full  p-2">
         <Image
           alt=""
           quality={100}
@@ -63,13 +62,13 @@ export const ProjectCard = ({
           src={"/api/uploads/" + Project.images[0]}
           width={1920}
           height={1080}
-          className="aspect-video w-full rounded-t-sm object-cover opacity-0 transition-opacity duration-500 ease-in-out"
+          className="aspect-video w-full rounded-sm object-cover opacity-0 transition-opacity duration-500 ease-in-out "
           onLoad={(image) => image.currentTarget.classList.remove("opacity-0")} // Remove the opacity-0 class after the image has loaded
           priority
         />
       </div>
       <div className=" w-full px-6 py-4 ">
-        <h5 className="text-xl font-bold tracking-tight text-heavy-metal-900 mb-1">
+        <h5 className="text-xl font-bold tracking-tight text-customcolors-secondary-300">
           {Project.name}
         </h5>
 

@@ -1,7 +1,7 @@
 "use client";
 
 import { AnimatePresence } from "framer-motion";
-import { Minimize2 } from "lucide-react";
+import { ChevronLeft } from "lucide-react";
 import { Lexend } from "next/font/google";
 import { useEffect, useRef, useState } from "react";
 import { ScrollArea } from "../ui/scroll-area";
@@ -42,16 +42,20 @@ const Projects = ({ projects }: { projects: Project[] }) => {
             initial={{ opacity: 0 }}
             exit={{ opacity: 0 }}
           >
-            <div className="   overflow-x-hidden h-[100dvh]  w-[min(800px,100vw)]  bg-[#0464bd]  ">
+            <div className="   overflow-x-hidden h-[100dvh]  w-[min(800px,100vw)]  bg-[#344966]  ">
               <ScrollArea className="h-[100dvh]  w-fit " ref={shownref}>
-                <Minimize2
-                  className="absolute stroke-[#ABCDB0] rotate-6 drop-shadow-sm hover:scale-90 transition shadow-white top-1 p-2 left-1 cursor-pointer z-30   font-bold"
-                  size={45}
+                <div
+                  className="absolute group bg-slate-300 bg-opacity-75  rounded-full flex items-center justify-center p-1 top-6 cursor-pointer left-6 z-30"
                   onClick={() => {
                     setProjectShown(null);
                   }}
-                />
-                <div className="w-[min(800px,100vw)] p-4 bg-white ">
+                >
+                  <ChevronLeft
+                    className=" stroke-[#0D1821]    drop-shadow-sm group-hover:scale-90   transition shadow-white     font-bold"
+                    size={24}
+                  />
+                </div>
+                <div className="w-[min(800px,100vw)] p-4 bg-[#F0F4EF] ">
                   <Carousel
                     IMAGES={projectShown.images.map((image, index) => {
                       return { id: index, imageSrc: "/api/uploads/" + image };
@@ -60,15 +64,15 @@ const Projects = ({ projects }: { projects: Project[] }) => {
                 </div>
                 <div
                   className={
-                    "min-w-full  flex flex-col justify-start  text-white   text-lg p-6 overflow-auto "
+                    "min-w-full  flex flex-col justify-start  text-[#F0F4EF]   text-lg p-6 overflow-auto "
                   }
                 >
                   <p className="text-2xl font-semibold underline-offset-4 underline">
                     {projectShown.name}
                   </p>
                   <p className="text-lg mb-4">{projectShown.category.name}</p>
+
                   <div
-                    className={lex.className}
                     dangerouslySetInnerHTML={{
                       __html: projectShown.description,
                     }}

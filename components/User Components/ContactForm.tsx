@@ -44,7 +44,7 @@ export function ContactForm() {
   return (
     <MotionDiv
       className={
-        "grid grid-cols-1   min-h-screen p-12 max-sm:p-0 relative rounded-lg "
+        "grid grid-cols-1   min-h-[100dvh] p-12 max-sm:p-0 relative rounded-lg "
       }
       animate={{
         opacity: [0, 1],
@@ -64,7 +64,8 @@ export function ContactForm() {
           alt=""
           src={imageParticulier}
           placeholder="blur"
-          className="object-cover h-full  rounded-md lg:order-1 transition-opacity"
+          onLoad={(image) => image.currentTarget.classList.remove("opacity-0")}
+          className="object-cover h-full  rounded-md lg:order-1 transition-opacity max-lg:rounded-none"
         />
         <FormParticulier showProfessionnel={showProfessionnel} />
       </MotionDiv>
@@ -82,7 +83,8 @@ export function ContactForm() {
           alt=""
           src={imageProfetionnel}
           placeholder="blur"
-          className="object-cover h-full lg:rounded-tr-md rounded-br-md max-lg:rounded-bl-md order-1 "
+          onLoad={(image) => image.currentTarget.classList.remove("opacity-0")}
+          className="object-cover h-full lg:rounded-md  order-1 "
         />
       </MotionDiv>
     </MotionDiv>

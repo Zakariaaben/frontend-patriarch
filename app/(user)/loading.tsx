@@ -3,7 +3,7 @@ import { Myspinner } from "@/components/User Components/spinner";
 
 const Loading = () => {
   return (
-    <div className="fixed h-screen w-screen top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+    <div className="fixed h-[100dvh] w-screen top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
       <div className="flex flex-col items-center justify-center h-screen">
         <MotionDiv
           animate={{ opacity: [0, 1] }}
