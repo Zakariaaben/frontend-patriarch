@@ -57,9 +57,9 @@ const FormParticulier = ({
               poppins.className
             }
           >
-            {errormessages.map((key, errorMessage) => {
+            {errormessages.map((errorMessage, index) => {
               return (
-                <li key={key} className="text-nowrap">
+                <li key={index} className="">
                   {errorMessage}
                 </li>
               );

@@ -61,7 +61,7 @@ const FormEntreprise = ({
           >
             {errormessages.map((errorMessage, index) => {
               return (
-                <li key={index} className="text-nowrap">
+                <li key={index} className="">
                   {errorMessage}
                 </li>
               );
