@@ -6,5 +6,6 @@ export const MotionSpan = motion.span;
 export const MotionSvg = motion.svg;
 export const MotionPath = motion.path;
 export const MotionButton = motion.button;
+export const MotionP = motion.p;
 
 export const Animatepresence = AnimatePresence;

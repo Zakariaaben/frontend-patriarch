@@ -1,3 +1,4 @@
+import { Toaster } from "@/components/ui/toaster";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
@@ -20,7 +21,10 @@ export default function RootLayout({
       <head>
         <link rel="Canoniques" href="https://patriarchplus.com" />
       </head>
-      <body className={inter.className + "  min-h-[100dvh]"}>{children}</body>
+      <body className={inter.className + "  min-h-[100dvh]"}>
+        {children}
+        <Toaster />
+      </body>
     </html>
   );
 }

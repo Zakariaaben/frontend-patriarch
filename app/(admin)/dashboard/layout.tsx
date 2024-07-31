@@ -1,7 +1,6 @@
 import SideNav from "@/components/Admin Components/SideNav";
 import TopBar from "@/components/Admin Components/TopBar";
 import { Card } from "@/components/ui/card";
-import { Toaster } from "@/components/ui/toaster";
 
 export default function DashboardLayout({
   children,
@@ -19,7 +18,6 @@ export default function DashboardLayout({
           <Card>{children}</Card>
         </div>
       </main>
-      <Toaster />
     </>
   );
 }

@@ -1,8 +1,16 @@
 "use client";
+import { FormSchema } from "@/validation/formValidation";
+import { Poppins } from "next/font/google";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { toast } from "../ui/use-toast";
 import ContactFormInput from "./ContactFormInput";
 import { SubmitButton } from "./formSubmitButton";
-
+const poppins = Poppins({
+  subsets: ["latin"],
+  style: "normal",
+  weight: ["400"],
+});
 const FormParticulier = ({
   showProfessionnel,
 }: {
@@ -14,9 +22,13 @@ const FormParticulier = ({
   const [email, setEmail] = useState("");
   const [description, setDescription] = useState("");
   const [typeOfProject, setType] = useState("");
+  const router = useRouter();
+
+  const [loading, setLoading] = useState(false);
 
   const handleContactFormSubmit = async (e: any) => {
     e.preventDefault();
+    setLoading(true);
     const data = {
       name,
       familyName,
@@ -26,13 +38,63 @@ const FormParticulier = ({
       typeOfProject,
       sender: "Particulier",
     };
-    const response = await fetch("/api/email/send", {
-      body: JSON.stringify(data),
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+
+    const parse = FormSchema.safeParse(data);
+    if (!parse.success) {
+      console.log(parse.error?.errors);
+
+      let errormessages: string[] = [];
+      parse.error?.errors.forEach((error) => {
+        errormessages.push(error.message);
+      });
+      setLoading(false);
+      return toast({
+        className: "w-full p-4",
+        action: (
+          <ul
+            className={
+              "w-full flex flex-col flex-nowrap  text-sm list-disc " +
+              poppins.className
+            }
+          >
+            {errormessages.map((errorMessage) => {
+              return <li className="text-nowrap">{errorMessage}</li>;
+            })}
+          </ul>
+        ),
+      });
+    }
+
+    try {
+      const response = await fetch("/api/email/send", {
+        body: JSON.stringify(data),
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw errorData;
+      }
+
+      toast({
+        action: <div className="w-full ">Message Envoyé avec succés !</div>,
+      });
+      router.push("/remerciments");
+    } catch (err: any) {
+      console.error(err);
+      toast({
+        action: (
+          <div className="text-customcolors-text">
+            Erreur Lors de l'envoi de votre Email
+          </div>
+        ),
+      });
+    } finally {
+      setLoading(false);
+    }
   };
   return (
     <div className="bg-customcolors-background lg:col-span-2  flex-col max-lg:row-span-2 lg:rounded-bl-md rounded-tl-md max-lg:rounded-tr-md overflow-hidden ">
@@ -104,7 +166,12 @@ const FormParticulier = ({
             >
               Vous êtes un organisme ou une Institution ?
             </span>
-            <SubmitButton onClick={handleContactFormSubmit} />
+            <SubmitButton
+              onClick={(e) => {
+                !loading ? handleContactFormSubmit(e) : null;
+              }}
+              loading={loading}
+            />
           </div>
         </div>
       </form>
