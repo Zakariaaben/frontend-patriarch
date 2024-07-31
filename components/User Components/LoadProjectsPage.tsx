@@ -31,7 +31,7 @@ export const LoadProjectsPage = ({
       return setPages((prevPages) => [...prevPages, [...data]]);
     };
     if (inView) fetchProjects().catch(console.error);
-  }, [inView]);
+  }, [inView, categoryId, pages]);
 
   return (
     <>

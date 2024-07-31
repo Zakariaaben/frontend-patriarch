@@ -59,8 +59,12 @@ const FormEntreprise = ({
               poppins.className
             }
           >
-            {errormessages.map((errorMessage) => {
-              return <li className="text-nowrap">{errorMessage}</li>;
+            {errormessages.map((errorMessage, index) => {
+              return (
+                <li key={index} className="text-nowrap">
+                  {errorMessage}
+                </li>
+              );
             })}
           </ul>
         ),
@@ -90,7 +94,7 @@ const FormEntreprise = ({
       toast({
         action: (
           <div className="text-customcolors-text">
-            Erreur Lors de l'envoi de votre Email
+            Erreur Lors de l&apos;envoi de votre Email
           </div>
         ),
       });

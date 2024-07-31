@@ -9,7 +9,7 @@ function Remerciments() {
         className="flex flex-row text-lg items-center cursor-pointer text-customcolors-text font-semibold group  absolute gap-2 top-4 left-4"
       >
         <ChevronLeft className=" group-hover:-translate-x-2 transition" />
-        Retourner à la page d'accueil
+        Retourner à la page d&apos;accueil
       </Link>
 
       <CheckCircle
