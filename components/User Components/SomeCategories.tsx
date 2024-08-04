@@ -1,8 +1,11 @@
+import getConfig from "next/config";
 import Image from "next/image";
 import Link from "next/link";
 
+const { publicRuntimeConfig } = getConfig();
+
 async function SomeCategories() {
-  const response = await fetch(process.env.API_URL + "/categories");
+  const response = await fetch(publicRuntimeConfig.API_URL + "/categories");
   const categories: Category[] = await response.json();
   const Length = categories.length - 1;
 
@@ -24,7 +27,7 @@ async function SomeCategories() {
     const relatedImages: string[] = [];
     for (const category of chosenCategories) {
       const response = await fetch(
-        `${process.env.API_URL}/projects?categoryId=${category.id}`
+        `${publicRuntimeConfig.API_URL}/projects?categoryId=${category.id}`
       );
 
       const projects: Project[] = await response.json();

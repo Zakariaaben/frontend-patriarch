@@ -3,11 +3,14 @@ import { CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { PlusCircle } from "lucide-react";
 import { revalidatePath } from "next/cache";
+import getConfig from "next/config";
 import Link from "next/link";
+
+const { publicRuntimeConfig } = getConfig();
 
 const Page = async () => {
   revalidatePath("/dashboard/projets");
-  const response = await fetch(`${process.env.API_URL}/projects`, {
+  const response = await fetch(`${publicRuntimeConfig.API_URL}/projects`, {
     method: "GET",
   });
   const Projects: Project[] = await response.json();

@@ -1,9 +1,12 @@
+import getConfig from "next/config";
 import { cookies } from "next/headers";
 import MobileSideNav from "./MobileSideNav";
 import SearchProfile from "./SearchProfile";
 
+const { publicRuntimeConfig } = getConfig();
+
 const TopBar = async () => {
-  const user = await fetch(process.env.API_URL + "/auth/check-auth", {
+  const user = await fetch(publicRuntimeConfig.API_URL + "/auth/check-auth", {
     method: "GET",
     credentials: "include",
     headers: {

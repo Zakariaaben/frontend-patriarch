@@ -1,6 +1,7 @@
 import { CardSkeleton } from "@/components/User Components/CardSkeleton";
 import { SelectCategoryMenu } from "@/components/User Components/selectMenu";
 import { revalidatePath } from "next/cache";
+import getConfig from "next/config";
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
 
@@ -12,6 +13,8 @@ const ProjectsView = dynamic(
   }
 );
 
+const { publicRuntimeConfig } = getConfig();
+
 export default async function NosProjets({
   searchParams,
 }: {
@@ -20,7 +23,7 @@ export default async function NosProjets({
   const { categoryId } = searchParams || {};
   let categories: Category[] = [];
   try {
-    const response = await fetch(process.env.API_URL + "/categories");
+    const response = await fetch(publicRuntimeConfig.API_URL + "/categories");
     categories = await response.json();
   } catch (e) {
     console.error(e);

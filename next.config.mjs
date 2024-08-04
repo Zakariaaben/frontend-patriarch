@@ -4,7 +4,9 @@ const nextConfig = {
     // Ignore TypeScript errors during the build process
     ignoreBuildErrors: true,
   },
-
+  publicRuntimeConfig: {
+    API_URL: "https://api.patriarchplus.com",
+  },
   async redirects() {
     return [
       {

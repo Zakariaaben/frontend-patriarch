@@ -1,9 +1,12 @@
+import getConfig from "next/config";
 import { LoadProjectsPage } from "./LoadProjectsPage";
 import { Animatepresence, MotionDiv } from "./motionComponents";
 
+const { publicRuntimeConfig } = getConfig();
+
 const ProjectsWrapper = async ({ categoryId }: { categoryId?: string }) => {
   const projects = await fetch(
-    process.env.API_URL +
+    publicRuntimeConfig.API_URL +
       "/projects?page=1" +
       (categoryId ? "&categoryId=" + categoryId : ""),
     { cache: "no-store" }

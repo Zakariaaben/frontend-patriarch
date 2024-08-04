@@ -1,12 +1,14 @@
 import DeleteProject from "@/components/Admin Components/DeleteProject";
 import { ArrowLeft, TriangleAlert } from "lucide-react";
 import { revalidatePath } from "next/cache";
+import getConfig from "next/config";
 import Link from "next/link";
+const { publicRuntimeConfig } = getConfig();
 
 const Page = async ({ params }: { params: { projectId: number } }) => {
   revalidatePath("/dashboard/projets/supprimer/[projectId]", "page");
   const response = await fetch(
-    `${process.env.API_URL}/projects/${params.projectId}`
+    `${publicRuntimeConfig.API_URL}/projects/${params.projectId}`
   );
   const exists = response.status;
   if (exists === 404) {

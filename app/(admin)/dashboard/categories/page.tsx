@@ -7,9 +7,12 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import getConfig from "next/config";
+
+const { publicRuntimeConfig } = getConfig();
 
 const Page = async () => {
-  const response = await fetch(process.env.API_URL + "/categories", {
+  const response = await fetch(publicRuntimeConfig.API_URL + "/categories", {
     method: "GET",
     credentials: "include",
     cache: "no-store",
