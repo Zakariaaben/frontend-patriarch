@@ -1,8 +1,8 @@
 import Navbar from "@/components/navbar";
-import { GeistSans } from "geist/font/sans";
+import { Montserrat } from "next/font/google";
 import { Suspense } from "react";
 import Loading from "./loading";
-
+const monserrat = Montserrat({ subsets: ["latin"] });
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -14,7 +14,7 @@ export default function RootLayout({
       <div
         className={
           "grid w-full   grid-cols-1 min-h-fit bg-customcolors-backgroundw items-center justify-center overflow-x-hidden text-heavy-metal " +
-          GeistSans.className
+          monserrat.className
         }
       >
         <Suspense fallback={<Loading />}>{children}</Suspense>
