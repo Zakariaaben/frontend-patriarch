@@ -22,8 +22,10 @@ const links: link[] = [
   { name: "Contact", url: "/contact" },
 ];
 
-import { GeistSans } from "geist/font/sans";
+import { Montserrat } from "next/font/google";
 import { useEffect, useState } from "react";
+
+const monserrat = Montserrat({ subsets: ["latin"] });
 
 const Navbar = () => {
   const [bgColor, setBgColor] = useState("");
@@ -48,23 +50,30 @@ const Navbar = () => {
   return (
     <>
       <div
-        className={`${GeistSans.className}  sticky z-[50] w-full  bg-customcolors-background top-0 min-w-full container flex h-12 items-center justify-between px-4 md:px-16 transition duration-300  ${bgColor}`}
+        className={`${monserrat.className} sticky z-[50] w-full  bg-customcolors-background top-0 min-w-full container flex h-12 items-center justify-between px-4 md:px-12 lg:px-16 transition duration-300  ${bgColor}`}
       >
-        <Link href="#" className="flex items-center gap-2" prefetch={false}>
-          <h1 className="text-3xl font-bold text-[#2E2D4D]">PatriArch</h1>
+        <Link href="/" className="flex items-center gap-2" prefetch={false}>
+          <h1
+            className="text-2xl font-extrabold text-[#2E2D4D]"
+            aria-label="Logo Patriarch"
+          >
+            Patri-Arch-Plus
+          </h1>
           <span className="sr-only">Acme Inc</span>
         </Link>
-        <nav className="hidden md:flex items-center gap-12">
-          {links.map((link, key) => (
-            <Link
-              key={key}
-              href={link.url}
-              className="text-lg font-medium   hover:text-heavy-metal-800"
-              prefetch={false}
-            >
-              {link.name}
-            </Link>
-          ))}
+        <nav className="hidden md:flex ">
+          <ul className="flex items-center gap-10">
+            {links.map((link, key) => (
+              <Link
+                href={link.url}
+                className="text-lg font-bold   hover:text-heavy-metal-800"
+                key={key}
+                prefetch
+              >
+                {link.name}
+              </Link>
+            ))}
+          </ul>
         </nav>
 
         <Sheet>
@@ -104,6 +113,7 @@ const Navbar = () => {
                     key={key}
                     href={link.url}
                     prefetch={false}
+                    scroll={false}
                     className={LinkStyle}
                   >
                     <button>{link.name}</button>

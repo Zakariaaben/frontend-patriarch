@@ -10,7 +10,7 @@ const Loading = () => {
           initial={{ opacity: 0 }}
           transition={{ duration: 1 }}
         >
-          <Myspinner color="black" />
+          <Myspinner color="black" size={15} />
         </MotionDiv>
       </div>
     </div>

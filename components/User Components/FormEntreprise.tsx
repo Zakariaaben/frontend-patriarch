@@ -167,12 +167,13 @@ const FormEntreprise = ({
           </div>
           <div className="flex justify-between items-center">
             <SubmitButton onClick={handleContactFormSubmit} loading={loading} />
-            <span
+            <button
+              type="button"
               onClick={showParticulier}
               className="z-100 bottom-4 left-4 text-secondarycolor-200 text-sm font-medium cursor-pointer  "
             >
               Vous êtes un Particulier ou un Professionnel ?
-            </span>
+            </button>
           </div>
         </div>
       </form>

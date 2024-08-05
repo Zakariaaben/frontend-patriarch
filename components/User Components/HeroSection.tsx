@@ -4,21 +4,14 @@ import { Montserrat } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
 import AnimatedText from "./AnimatedText";
-import { MotionDiv, MotionSpan } from "./motionComponents";
+import { MotionSpan } from "./motionComponents";
 import BG from "/public/Ghardaia_view.jpg";
 const montserrat = Montserrat({
   subsets: ["latin"],
 });
 export default function Hero() {
   return (
-    <MotionDiv
-      animate={{
-        opacity: [0, 1],
-      }}
-      initial={{ opacity: 0 }}
-      transition={{ duration: 1, once: true }}
-      className="relative mb-12"
-    >
+    <div className="relative mb-12">
       <div
         className={" relative bg-black bg-opacity-20 " + montserrat.className}
       >
@@ -93,6 +86,7 @@ export default function Hero() {
           src={BG}
           alt="Background Image hero section Architecture"
           fill
+          placeholder="blur"
           priority
           className="absolute w-full object-cover top-0 z-[-1] "
         />
@@ -108,6 +102,6 @@ export default function Hero() {
           Françoise Choay dans L&apos;Allégorie du patrimoine (1992)
         </span>
       </h2>
-    </MotionDiv>
+    </div>
   );
 }

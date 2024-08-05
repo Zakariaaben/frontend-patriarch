@@ -1,7 +1,9 @@
 import Apropos from "@/components/User Components/Apropos";
 import Hero from "@/components/User Components/HeroSection";
 import LogosSlider from "@/components/User Components/LogoSlider";
-import SomeCategories from "@/components/User Components/SomeCategories";
+import SomeCategories, {
+  SkeletonSomeCategories,
+} from "@/components/User Components/SomeCategories";
 import { Suspense } from "react";
 
 export default function Home() {
@@ -9,10 +11,8 @@ export default function Home() {
     <>
       <Hero />
       <Apropos />
-      <Suspense
-        fallback={<div className="text-2xl">Loading categories...</div>}
-      >
-        <SomeCategories />
+      <Suspense fallback={<SkeletonSomeCategories numberOfCategories={3} />}>
+        <SomeCategories numberOfCategories={3} />
       </Suspense>
       <LogosSlider />
     </>

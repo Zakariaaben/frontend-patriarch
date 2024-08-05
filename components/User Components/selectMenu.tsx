@@ -2,6 +2,7 @@
 
 import { motion, useAnimationControls } from "framer-motion";
 import { ChevronDown } from "lucide-react";
+import { unstable_noStore as noStore } from "next/cache";
 import { Open_Sans } from "next/font/google";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
@@ -16,6 +17,7 @@ export function SelectCategoryMenu({
   options: Category[];
   defaultValue: string;
 }) {
+  noStore();
   const pathname = usePathname();
   const Router = useRouter();
   const menu = useRef<HTMLDivElement>(null);

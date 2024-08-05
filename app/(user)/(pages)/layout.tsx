@@ -1,7 +1,8 @@
 import Navbar from "@/components/navbar";
+import Footer from "@/components/User Components/footer";
 import { Montserrat } from "next/font/google";
 import { Suspense } from "react";
-import Loading from "./loading";
+
 const monserrat = Montserrat({ subsets: ["latin"] });
 export default function RootLayout({
   children,
@@ -13,12 +14,13 @@ export default function RootLayout({
       <Navbar />
       <div
         className={
-          "grid w-full   grid-cols-1 min-h-fit bg-customcolors-backgroundw items-center justify-center overflow-x-hidden text-heavy-metal " +
+          "grid w-full   grid-cols-1 min-h-[100dvh] bg-customcolors-backgroundw items-center justify-center overflow-x-hidden text-heavy-metal " +
           monserrat.className
         }
       >
-        <Suspense fallback={<Loading />}>{children}</Suspense>
+        <Suspense>{children}</Suspense>
       </div>
+      <Footer />
     </>
   );
 }

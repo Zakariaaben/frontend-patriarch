@@ -164,12 +164,13 @@ const FormParticulier = ({
             </label>
           </div>
           <div className="flex justify-between items-center">
-            <span
+            <button
+              type="button"
               className="z-100 bottom-4 left-4 text-secondarycolor-200 text-justify  font-medium cursor-pointer text-sm shadow-black"
               onClick={showProfessionnel}
             >
               Vous êtes un organisme ou une Institution ?
-            </span>
+            </button>
             <SubmitButton
               onClick={(e) => {
                 !loading ? handleContactFormSubmit(e) : null;

@@ -1,6 +1,6 @@
 import { CardSkeleton } from "@/components/User Components/CardSkeleton";
 import { SelectCategoryMenu } from "@/components/User Components/selectMenu";
-import { revalidatePath } from "next/cache";
+import { unstable_noStore as noStore } from "next/cache";
 import getConfig from "next/config";
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
@@ -20,6 +20,7 @@ export default async function NosProjets({
 }: {
   searchParams?: { [key: string]: string | undefined };
 }) {
+  noStore();
   const { categoryId } = searchParams || {};
   let categories: Category[] = [];
   try {
@@ -29,7 +30,6 @@ export default async function NosProjets({
     console.error(e);
     categories = [];
   }
-  revalidatePath("/nosprojets");
   return (
     <div className={"text-slate-800 min-h-[100dvh]  "}>
       <div className="flex items-center w-full  p-4 gap-4">
@@ -43,7 +43,14 @@ export default async function NosProjets({
         />
       </div>
 
-      <Suspense key={categoryId} fallback={<CardSkeleton />}>
+      <Suspense
+        key={categoryId}
+        fallback={
+          <div className="min-h-[100dvh]">
+            <CardSkeleton />
+          </div>
+        }
+      >
         <ProjectsView categoryId={categoryId} key={categoryId} />
       </Suspense>
     </div>
