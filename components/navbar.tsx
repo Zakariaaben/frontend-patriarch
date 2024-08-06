@@ -52,7 +52,7 @@ const Navbar = () => {
       <div
         className={`${monserrat.className} sticky z-[50] w-full  bg-customcolors-background top-0 min-w-full container flex h-12 items-center justify-between px-4 md:px-12 lg:px-16 transition duration-300  ${bgColor}`}
       >
-        <Link href="/" className="flex items-center gap-2" prefetch={false}>
+        <Link href="/" className="flex items-center gap-2">
           <h1
             className="text-2xl font-extrabold text-[#2E2D4D]"
             aria-label="Logo Patriarch"
@@ -68,7 +68,6 @@ const Navbar = () => {
                 href={link.url}
                 className="text-lg font-bold   hover:text-heavy-metal-800"
                 key={key}
-                prefetch
               >
                 {link.name}
               </Link>
@@ -112,7 +111,6 @@ const Navbar = () => {
                   <Link
                     key={key}
                     href={link.url}
-                    prefetch={false}
                     scroll={false}
                     className={LinkStyle}
                   >

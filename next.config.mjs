@@ -5,7 +5,7 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   publicRuntimeConfig: {
-    API_URL: "https://api.patriarchplus.com",
+    API_URL: process.env.API_URL || "",
   },
   async redirects() {
     return [
