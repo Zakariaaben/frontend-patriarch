@@ -4,9 +4,6 @@ const nextConfig = {
     // Ignore TypeScript errors during the build process
     ignoreBuildErrors: true,
   },
-  publicRuntimeConfig: {
-    API_URL: process.env.API_URL || "",
-  },
   async redirects() {
     return [
       {

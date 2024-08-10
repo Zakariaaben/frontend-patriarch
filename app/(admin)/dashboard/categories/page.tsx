@@ -7,12 +7,9 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import getConfig from "next/config";
-
-const { publicRuntimeConfig } = getConfig();
 
 const Page = async () => {
-  const response = await fetch(publicRuntimeConfig.API_URL + "/categories", {
+  const response = await fetch("https://api.patriarchplus.com/categories", {
     method: "GET",
     credentials: "include",
     cache: "no-store",

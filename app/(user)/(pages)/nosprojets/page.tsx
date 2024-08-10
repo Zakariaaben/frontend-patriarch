@@ -1,7 +1,6 @@
 import { CardSkeleton } from "@/components/User Components/CardSkeleton";
 import { SelectCategoryMenu } from "@/components/User Components/selectMenu";
 import { unstable_noStore as noStore } from "next/cache";
-import getConfig from "next/config";
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
 
@@ -13,8 +12,6 @@ const ProjectsView = dynamic(
   }
 );
 
-const { publicRuntimeConfig } = getConfig();
-
 export default async function NosProjets({
   searchParams,
 }: {
@@ -24,7 +21,7 @@ export default async function NosProjets({
   const { categoryId } = searchParams || {};
   let categories: Category[] = [];
   try {
-    const response = await fetch(publicRuntimeConfig.API_URL + "/categories");
+    const response = await fetch("https://api.patriarchplus.com/categories");
     categories = await response.json();
   } catch (e) {
     console.error(e);
