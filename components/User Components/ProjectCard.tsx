@@ -1,14 +1,10 @@
-import { Lexend, Open_Sans } from "next/font/google";
 import Image from "next/image";
-import { useEffect, useRef } from "react";
 import { MotionDiv } from "./motionComponents";
-const os = Open_Sans({ subsets: ["latin"] });
-const lex = Lexend({ weight: "400", subsets: ["latin"] });
+
 export const ProjectCard = ({
   Project,
   index,
   handleShownId,
-  shownref,
   currentProject,
 }: {
   Project: Project;
@@ -17,28 +13,8 @@ export const ProjectCard = ({
   shownref: React.RefObject<HTMLDivElement>;
   currentProject: Project | null;
 }) => {
-  const ref = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        ref.current &&
-        !ref.current.contains(event.target as HTMLElement) &&
-        shownref.current &&
-        !shownref.current.contains(event.target as HTMLElement)
-      ) {
-        handleShownId(null);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }),
-    [ref];
-
   return (
     <MotionDiv
-      ref={ref}
       className={
         " rounded-sm border-gray-700  bg-customcolors-secondary-950 cursor-pointer  "
       }
@@ -57,14 +33,11 @@ export const ProjectCard = ({
       <div className="w-full  p-2">
         <Image
           alt=""
-          quality={100}
-          loader={({ src }) => src + `?q=1`}
+          quality={75}
           src={"/api/uploads/" + Project.images[0]}
-          width={1920}
-          height={1080}
-          className="aspect-video w-full rounded-sm object-cover opacity-0 transition-opacity duration-500 ease-in-out "
-          onLoad={(image) => image.currentTarget.classList.remove("opacity-0")} // Remove the opacity-0 class after the image has loaded
-          priority
+          width={400}
+          height={400}
+          className="aspect-video w-full rounded-sm object-cover  transition-opacity duration-500 ease-in-out "
         />
       </div>
       <div className=" w-full px-6 py-4 ">

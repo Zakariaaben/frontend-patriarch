@@ -2,13 +2,11 @@
 
 import { AnimatePresence } from "framer-motion";
 import { ChevronLeft } from "lucide-react";
-import { Lexend } from "next/font/google";
 import { useEffect, useRef, useState } from "react";
 import { ScrollArea } from "../ui/scroll-area";
 import { Carousel } from "./carousel";
 import { MotionDiv } from "./motionComponents";
 import { ProjectCard } from "./ProjectCard";
-const lex = Lexend({ weight: "400", subsets: ["latin"] });
 const Projects = ({ projects }: { projects: Project[] }) => {
   const shownref = useRef<HTMLDivElement>(null);
   const [projectShown, setProjectShown] = useState<Project | null>(null);
