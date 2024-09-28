@@ -3,15 +3,17 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import useMeasure from "react-use-measure";
 import { MotionDiv } from "./motionComponents";
-import Logo1 from "/public/logos/Logo1.svg";
+import Logo1 from "/public/logos/apc.png";
 import Logo2 from "/public/logos/Logo2.svg";
-import Logo3 from "/public/logos/Logo3.svg";
+import Logo3 from "/public/logos/biskra.jpeg";
 import Logo4 from "/public/logos/Logo4.png";
 
 const logos = [
-  { logo: Logo1, text: "Cest le logo 1" },
+  { logo: Logo1, text: "APC ALGER CENTRE" },
   { logo: Logo2, text: "" },
-  { logo: Logo3, text: "logo3 foesuaf" },
+  { logo: Logo1, text: "APC Dar El Beida" },
+  { logo: Logo3, text: "Direction de la culture Biskra" },
+  { logo: Logo1, text: "APC Khraicia" },
   { logo: Logo4, text: "" },
 ];
 
@@ -26,13 +28,18 @@ const LogoInner = () => {
         ref={ref}
       >
         {logos.map((logo, index) => (
-          <div className={`flex flex-col items-center  w-[200px] `} key={index}>
+          <div
+            className={`flex flex-col items-center  w-[200px] h-44 mx-10`}
+            key={index}
+          >
             <Image
               src={logo.logo}
               alt="logo"
               className="object-contain h-full w-auto "
             />
-            <p className="font-semibold uppercase">{logo.text}</p>
+            <p className="font-bold uppercase text-base text-center">
+              {logo.text}
+            </p>
           </div>
         ))}
       </MotionDiv>
