@@ -1,4 +1,9 @@
-import * as SI from "@icons-pack/react-simple-icons";
+import {
+  SiGooglemaps,
+  SiFacebook,
+  SiGmail,
+  SiLinkedin,
+} from "@icons-pack/react-simple-icons";
 import { PhoneCallIcon } from "lucide-react";
 import Link from "next/link";
 
@@ -18,7 +23,7 @@ const Footer = () => {
               target="_blank"
               href={"https://maps.app.goo.gl/fY9d4gXNqHJdgwYt5"}
             >
-              <SI.SiGooglemaps className="w-6" />
+              <SiGooglemaps className="w-6" />
               <span>08 Rue Hamidi Said, Birkhadem</span>
             </Link>
           </li>
@@ -27,7 +32,7 @@ const Footer = () => {
               target="_blank"
               href="https://facebook.com/p/PATRI-ARCH-PLUS-100063101627356"
             >
-              <SI.SiFacebook className="w-6" />
+              <SiFacebook className="w-6" />
               <span>Patri-Arch-Plus</span>
             </Link>
           </li>
@@ -36,13 +41,13 @@ const Footer = () => {
               target="_blank"
               href={"https://www.linkedin.com/in/youcef-benhamiche-77177423"}
             >
-              <SI.SiLinkedin className="w-6" />
+              <SiLinkedin className="w-6" />
               <span>Patri-Arch-Plus</span>
             </Link>
           </li>
           <li className="max-lg:col-span-full flex justify-center">
             <Link target="_blank" href={"mailto:contact@patriarchplus.com"}>
-              <SI.SiGmail className="w-6" />
+              <SiGmail className="w-6" />
               <span>contact@patriarchplus.com</span>
             </Link>
           </li>
