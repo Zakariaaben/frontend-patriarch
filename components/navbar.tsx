@@ -18,7 +18,7 @@ interface link {
 const links: link[] = [
   { name: "Acceuil", url: "/" },
   { name: "Nos Projets", url: "/nosprojets" },
-  { name: "Services", url: "/services" },
+  { name: "Nos Prestations", url: "/nosprestations" },
   { name: "Contact", url: "/contact" },
 ];
 
